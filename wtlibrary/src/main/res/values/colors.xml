@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--状态栏颜色-->
+    <color name="colorPrimaryDark">#f16542</color>
+    <!--标题栏颜色-->
+    <color name="colorPrimary">#f16542</color>
+    <!--控件颜色-->
+    <color name="colorAccent">#f16542</color>
+</resources>
