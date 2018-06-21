@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import com.umeng.analytics.MobclickAgent
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -76,8 +77,7 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * 获取指定的权限，需要手动调用
      */
-    protected fun getAppointPermisson(permissions: Array<String>)
-    {
+    protected fun getAppointPermisson(permissions: Array<String>) {
         if (EasyPermissions.hasPermissions(this, *permissions)) {
             // Already have permission, do the thing
             // ...
@@ -147,10 +147,17 @@ abstract class BaseActivity : AppCompatActivity() {
                         .setPositiveButtonText(R.string.button_allow)
                         .setNegativeButtonText(R.string.button_deny)
                         .build())
+
+        //友盟的统计
+        MobclickAgent.onResume(this);
+        MobclickAgent.onPageStart(javaClass.name)
     }
 
     override fun onPause() {
         super.onPause()
+        //友盟的统计
+        MobclickAgent.onPause(this);
+        MobclickAgent.onPageEnd(javaClass.name);
     }
 
     override fun onDestroy() {
@@ -201,7 +208,6 @@ abstract class BaseActivity : AppCompatActivity() {
     protected abstract fun initView()
 
     protected abstract fun initData()
-
 
 
 }

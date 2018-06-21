@@ -32,7 +32,6 @@ class TestFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListener {
     var currentPage : Int?= 0
 
     override fun initView() {
-        mDataBinding =null
         dataBinding = mDataBinding as FragmentTestBinding?
         dataBinding!!.refreshLayout.setOnRefreshListener(this)
         dataBinding!!.refreshLayout.setOnLoadMoreListener(this)
