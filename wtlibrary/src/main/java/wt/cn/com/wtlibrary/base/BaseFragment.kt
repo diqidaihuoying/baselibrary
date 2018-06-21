@@ -1,7 +1,6 @@
 package wt.cn.com.wtlibrary.base
 
 
-import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle

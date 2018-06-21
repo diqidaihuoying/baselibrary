@@ -1,15 +1,19 @@
 package wt.cn.com.wtlibrary.simple.activity
 
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import wt.cn.com.wtlibrary.R
 import wt.cn.com.wtlibrary.base.BaseActivity
 import wt.cn.com.wtlibrary.base.BaseFragment
 import wt.cn.com.wtlibrary.base.TabAdapter
 import wt.cn.com.wtlibrary.databinding.ActivityMainBinding
+import wt.cn.com.wtlibrary.eventbus.MessageEvent
 import wt.cn.com.wtlibrary.http.ResponseCallback
 import wt.cn.com.wtlibrary.simple.bean.ImageModel
 import wt.cn.com.wtlibrary.simple.bean.Interest
 import wt.cn.com.wtlibrary.simple.fragment.TestFragment
 import wt.cn.com.wtlibrary.simple.http.RetrofitHelp
+import wt.cn.com.wtlibrary.util.ToastUtils
 
 
 class MainActivity : BaseActivity() {
@@ -51,6 +55,21 @@ class MainActivity : BaseActivity() {
         }))
     }
 
+    @Subscribe
+    fun receiveMessage(event: MessageEvent)
+    {
+        ToastUtils.showShort(event.message!!)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
 }
 
 

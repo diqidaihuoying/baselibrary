@@ -15,6 +15,11 @@ import wt.cn.com.wtlibrary.simple.adapter.TestRecAdapter
 import wt.cn.com.wtlibrary.simple.bean.WorkInfo
 import wt.cn.com.wtlibrary.simple.http.RetrofitHelp
 import java.util.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import wt.cn.com.wtlibrary.eventbus.Message
+import wt.cn.com.wtlibrary.eventbus.MessageEvent
+import wt.cn.com.wtlibrary.util.ToastUtils
 
 
 /**
@@ -24,7 +29,7 @@ import java.util.*
  */
 class TestFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListener {
 
-    val TAG: String = "TestFragment"
+    val TAG:String ="TestFragment"
     override val layoutId: Int
         get() = R.layout.fragment_test
 
@@ -40,6 +45,10 @@ class TestFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListener {
         dataBinding!!.refreshLayout.setOnLoadMoreListener(this)
 
         adapter = TestRecAdapter(context, list)
+        dataBinding!!.recyclerView.layoutManager=LinearLayoutManager(context)
+        dataBinding!!.recyclerView.adapter=adapter
+
+        EventBus.getDefault().post(MessageEvent(Message.TEST_MESSAGE))
 
 //        adapter!!.setOnRcyClickListener(object : BaseRecyclerAdapter.OnRcyClickListener {
 //            override fun onRcyClick(parent: ViewGroup, viewType: Int) {
@@ -73,6 +82,7 @@ class TestFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListener {
                 adapter!!.notifyDataSetChanged()
             }
         }))
+
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
