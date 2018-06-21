@@ -7,8 +7,8 @@ import wt.cn.com.wtlibrary.base.TabAdapter
 import wt.cn.com.wtlibrary.databinding.ActivityMainBinding
 import wt.cn.com.wtlibrary.http.ResponseCallback
 import wt.cn.com.wtlibrary.simple.bean.Interest
-import wt.cn.com.wtlibrary.simple.http.RetrofitHelp
 import wt.cn.com.wtlibrary.simple.fragment.TestFragment
+import wt.cn.com.wtlibrary.simple.http.RetrofitHelp
 
 
 class MainActivity : BaseActivity() {

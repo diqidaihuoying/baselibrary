@@ -24,7 +24,7 @@ class TestRecAdapter(context: Context?, list: List<WorkInfo>) : BaseRecyclerAdap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseRecyclerHolder {
         var itemTestBinding = DataBindingUtil.inflate<ItemTestBinding>(LayoutInflater.from(context), R.layout.item_test, parent, false)
-        itemTestBinding.root.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtils.dip2px(context, 200f))
+        itemTestBinding.root.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtils.dip2px(context, 300f))
         var testViewHolder = TestViewHolder(itemTestBinding.root)
         testViewHolder.itemTestBinding = itemTestBinding
         return testViewHolder

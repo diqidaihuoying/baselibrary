@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -22,10 +24,17 @@ android {
     dataBinding {
         enabled true
     }
+
 }
 
 kapt {
     generateStubs = true
+}
+
+greendao {
+    schemaVersion 1  //版本
+    daoPackage 'wt.cn.com.wt9.greendao' // 一般为app包名+生成文件的文件夹名
+    targetGenDir 'src/main/java' //生成文件路径
 }
 
 dependencies {
@@ -39,6 +48,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':wtlibrary')
 
-    /*databinding配置*/
-    kapt "com.android.databinding:compiler:3.1.3"
+
 }
