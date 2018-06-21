@@ -94,4 +94,6 @@ object LogUtil {
     fun setTag(tag: String): String {
         return StringBuffer(TAG).append(tag).toString()
     }
+
+
 }

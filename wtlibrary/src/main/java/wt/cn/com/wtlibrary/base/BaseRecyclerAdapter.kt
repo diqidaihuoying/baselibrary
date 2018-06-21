@@ -9,11 +9,8 @@ import android.view.View
  * 描述: 空实现，以后优化
  * 作者:wantao
  */
-abstract class BaseRecyclerAdapter<T>(protected var context: Context, protected var list: List<T>) : RecyclerView.Adapter<BaseRecyclerAdapter.BaseRecyclerHolder>() {
+abstract class BaseRecyclerAdapter<T>(protected var context: Context?, protected var list: List<T>) : RecyclerView.Adapter<BaseRecyclerAdapter.BaseRecyclerHolder>() {
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
 
     open  class BaseRecyclerHolder(itemView :View) : RecyclerView.ViewHolder(itemView)
 

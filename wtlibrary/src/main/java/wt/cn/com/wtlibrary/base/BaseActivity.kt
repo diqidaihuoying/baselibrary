@@ -24,6 +24,7 @@ import pub.devrel.easypermissions.PermissionRequest
 import wt.cn.com.wtlibrary.R
 import wt.cn.com.wtlibrary.http.HttpResult
 import wt.cn.com.wtlibrary.http.ResponseCallback
+import wt.cn.com.wtlibrary.util.CurActivityManager
 import wt.cn.com.wtlibrary.util.SystemBarTintManager
 
 
@@ -49,9 +50,10 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //设置沉浸式状态栏
+        CurActivityManager.getActivityManager().pushActivity(this)
         mDataBinding = DataBindingUtil.setContentView(this@BaseActivity, layoutId)
         mDataBinding?.root?.setFitsSystemWindows(true)
+        //设置沉浸式状态栏
         setRootView()
         initView()
         initData()
@@ -71,17 +73,33 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * 获取指定的权限，需要手动调用
+     */
+    protected fun getAppointPermisson(permissions: Array<String>)
+    {
+        if (EasyPermissions.hasPermissions(this, *permissions)) {
+            // Already have permission, do the thing
+            // ...
+        } else {
+            // Do not have permissions, request them now
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_location),
+                    1, *permissions)
+        }
+    }
+
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
-    fun onPermissionsGranted(requestCode: Int, list: List<String>) {
+    protected fun onPermissionsGranted(requestCode: Int, list: List<String>) {
         // Some permissions have been granted
         // ...
     }
 
-    fun onPermissionsDenied(requestCode: Int, list: List<String>) {
+    protected fun onPermissionsDenied(requestCode: Int, list: List<String>) {
         // Some permissions have been denied
         if (EasyPermissions.somePermissionPermanentlyDenied(this, list)) {
             AppSettingsDialog.Builder(this).build().show()
@@ -100,7 +118,7 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * 设置沉浸式
      */
-    private fun setRootView() {
+    open fun setRootView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val window = window
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
@@ -137,6 +155,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        CurActivityManager.getActivityManager().popActivity(this)
         if (mCompositeDisposable != null) {
             mCompositeDisposable!!.clear()
             mCompositeDisposable!!.dispose()
@@ -177,12 +196,13 @@ abstract class BaseActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { tHttpResult -> tHttpResult.data }
-
     }
 
     protected abstract fun initView()
 
     protected abstract fun initData()
+
+
 
 }
 
