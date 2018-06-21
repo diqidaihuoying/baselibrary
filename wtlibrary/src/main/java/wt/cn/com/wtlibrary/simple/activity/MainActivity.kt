@@ -6,6 +6,7 @@ import wt.cn.com.wtlibrary.base.BaseFragment
 import wt.cn.com.wtlibrary.base.TabAdapter
 import wt.cn.com.wtlibrary.databinding.ActivityMainBinding
 import wt.cn.com.wtlibrary.http.ResponseCallback
+import wt.cn.com.wtlibrary.simple.bean.ImageModel
 import wt.cn.com.wtlibrary.simple.bean.Interest
 import wt.cn.com.wtlibrary.simple.fragment.TestFragment
 import wt.cn.com.wtlibrary.simple.http.RetrofitHelp
@@ -23,8 +24,14 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
         dataBinding = mDataBinding as ActivityMainBinding?
-        tabAdapter = TabAdapter(supportFragmentManager, fragments, titles)
+        dataBinding!!.mod = object : ImageModel()
+        {
+            override fun getImageUrl(): String {
+              return ""
+            }
+        }
 
+        tabAdapter = TabAdapter(supportFragmentManager, fragments, titles)
     }
 
     override fun initData() {
