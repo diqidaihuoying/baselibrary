@@ -76,6 +76,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     /**
      * 获取指定的权限，需要手动调用
+     *
      */
     protected fun getAppointPermisson(permissions: Array<String>) {
         if (EasyPermissions.hasPermissions(this, *permissions)) {
