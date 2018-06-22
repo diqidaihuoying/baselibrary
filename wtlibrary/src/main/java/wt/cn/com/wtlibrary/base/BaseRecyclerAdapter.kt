@@ -59,11 +59,11 @@ abstract class BaseRecyclerAdapter<T>(protected var context: Context?, protected
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseRecyclerHolder {
         var itemTestBinding = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(context), getlayoutId(viewType), parent, false)
         itemTestBinding.root.setOnClickListener {
-            clicklistener!!.onRcyClick(parent, viewType)
+            clicklistener?.onRcyClick(parent, viewType)
         }
 
         itemTestBinding.root.setOnLongClickListener {
-            longClicklistener!!.onRcyLongClick(parent, viewType)
+            longClicklistener?.onRcyLongClick(parent, viewType)?:false
         }
 
         return createviewHolder(parent, viewType, itemTestBinding)

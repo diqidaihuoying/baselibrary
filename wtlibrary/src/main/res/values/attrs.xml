@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--内容视图控件-->
+    <declare-styleable name="MultiLayout">
+        <!-- 空布局资源id -->
+        <attr name="llEmptyResId" format="reference"/>
+        <!-- 无网络资源id -->
+        <attr name="llNoNetworkResId" format="reference"/>
+        <!-- 加载资源id -->
+        <attr name="llLoadingResId" format="reference"/>
+    </declare-styleable>
+</resources>

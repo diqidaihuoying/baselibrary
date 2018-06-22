@@ -1,15 +1,23 @@
 package wt.cn.com.wtlibrary.base
 
 import android.Manifest
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
 import com.umeng.analytics.MobclickAgent
 import io.reactivex.Observable
@@ -23,9 +31,11 @@ import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
 import wt.cn.com.wtlibrary.R
+import wt.cn.com.wtlibrary.databinding.ActivityBaseBinding
 import wt.cn.com.wtlibrary.http.HttpResult
 import wt.cn.com.wtlibrary.http.ResponseCallback
 import wt.cn.com.wtlibrary.util.CurActivityManager
+import wt.cn.com.wtlibrary.util.NetWorkUtil
 import wt.cn.com.wtlibrary.util.SystemBarTintManager
 
 
@@ -45,22 +55,52 @@ abstract class BaseActivity : AppCompatActivity() {
     protected abstract val layoutId: Int
 
     /**
-     * databinding
+     * basebinding
      */
-    protected var mDataBinding: ViewDataBinding? = null
+    private var mActivityBinding: ActivityBaseBinding ? = null
+
+    /**
+     * 内容binding
+     */
+    protected var mDataBinding :ViewDataBinding ?=null
+    
+    /**
+     * 网络监听
+     */
+    private var netWorkReceiver = NetWorkReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CurActivityManager.getActivityManager().pushActivity(this)
-        mDataBinding = DataBindingUtil.setContentView(this@BaseActivity, layoutId)
-        mDataBinding?.root?.setFitsSystemWindows(true)
+        mActivityBinding = DataBindingUtil.setContentView(this@BaseActivity, R.layout.activity_base)
+        mActivityBinding!!.root!!.setFitsSystemWindows(true)
         //设置沉浸式状态栏
         setRootView()
+        //添加内容布局
+        mDataBinding= DataBindingUtil.inflate(LayoutInflater.from(this), layoutId, mActivityBinding!!.root as ViewGroup,false)
+        mActivityBinding!!.container!!.addView(mDataBinding!!.root)
+        //注册网络监听
+        registerNetWorkReceiver()
         initView()
         initData()
-
+     
     }
 
+    /**
+     * 注册网络监听
+     */
+    private fun registerNetWorkReceiver() {
+        var filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(netWorkReceiver, filter);
+    }
+
+    /**
+     * 取消网络监听
+     */
+    private fun unregisterNetWorkReceiver()
+    {
+        unregisterReceiver(netWorkReceiver)
+    }
 
     @AfterPermissionGranted(1)
     private fun methodRequiresTwoPermission() {
@@ -163,6 +203,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        unregisterNetWorkReceiver()
         CurActivityManager.getActivityManager().popActivity(this)
         if (mCompositeDisposable != null) {
             mCompositeDisposable!!.clear()
@@ -210,6 +251,19 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract fun initData()
 
+
+    inner class NetWorkReceiver : BroadcastReceiver()
+    {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (!NetWorkUtil.isNetworkAvailable(context!!))
+            {
+                mActivityBinding!!.multiLayout.showNoNetwork()
+            }else
+            {
+                mActivityBinding!!.multiLayout.showContent()
+            }
+        }
+    }
 
 }
 

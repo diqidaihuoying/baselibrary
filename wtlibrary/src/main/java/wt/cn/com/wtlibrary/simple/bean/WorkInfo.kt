@@ -61,7 +61,7 @@ class WorkInfo : ImageModel() {
     val uid: Long = 0
     val width: Int = 0
 
-    override fun getImageUrl(): String? {
+    fun getImageUrl(): String? {
         return cover
     }
 
