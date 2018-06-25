@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <cn.com.base.views.MultiLayout
+        android:id="@+id/multiLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".base.BaseFragment">
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </cn.com.base.views.MultiLayout>
+</layout>

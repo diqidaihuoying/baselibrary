@@ -1,8 +1,8 @@
 package wt.cn.com.wt9.greendao
 
 import android.content.Context
+import cn.com.base.LibApplication
 import wt.cn.com.wt9.bean.Work
-import wt.cn.com.wtlibrary.LibApplication
 
 /**
  * 创建日期：2018/6/21 on 13:55
