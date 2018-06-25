@@ -63,7 +63,7 @@ abstract class BaseRecyclerAdapter<T>(protected var context: Context?, protected
         }
 
         itemTestBinding.root.setOnLongClickListener {
-            longClicklistener?.onRcyLongClick(parent, viewType)?:false
+            longClicklistener?.onRcyLongClick(parent, viewType) ?: true
         }
 
         return createviewHolder(parent, viewType, itemTestBinding)

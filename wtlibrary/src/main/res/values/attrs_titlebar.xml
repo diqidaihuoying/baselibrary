@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TitleBarView">
+        <attr name="titlename" format="string"/>
+        <attr name="titlesize" format="dimension"/>
+        <attr name="titlecolor" format="color"/>
+
+        <attr name="leftbtnName" format="string"/>
+        <attr name="rightbtnName" format="string"/>
+        <attr name="leftbtnColor" format="color"/>
+        <attr name="rightbtnColor" format="color"/>
+        <attr name="leftbtnSize" format="dimension"/>
+        <attr name="rightbtnSize" format="dimension"/>
+
+        <attr name="leftimg" format="reference"/>
+        <attr name="rightimg" format="reference"/>
+
+        <attr name="leftdisplay">
+            <enum name="air" value="0"/>
+            <enum name="tv" value="1"/>
+            <enum name="img" value="2"/>
+        </attr>
+
+        <attr name="rightdisplay">
+            <enum name="air" value="0"/>
+            <enum name="tv" value="1"/>
+            <enum name="img" value="2"/>
+        </attr>
+
+    </declare-styleable>
+
+
+    <declare-styleable name="TitleButton">
+        <attr name="tvname" format="string"/>
+        <attr name="tvcolor" format="color"/>
+        <attr name="tvsize" format="dimension"/>
+        <attr name="img" format="reference"/>
+        <attr name="displaystatus">
+            <enum name="air" value="0"/>
+            <enum name="tv" value="1"/>
+            <enum name="img" value="2"/>
+        </attr>
+    </declare-styleable>
+
+</resources>

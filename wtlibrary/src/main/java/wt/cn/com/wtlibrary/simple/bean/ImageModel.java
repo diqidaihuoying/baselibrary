@@ -11,24 +11,19 @@ import wt.cn.com.wtlibrary.simple.util.StrUtils;
  * date        : 2017/11/8 14:25
  * description : 图片加载类
  */
-public class ImageModel{
+abstract public class ImageModel{
 
-    public String imageUrl;
-
-    public ImageModel() {
-    }
-
-    public ImageModel(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+    protected String imageUrl;
 
     @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         GlideUtil.getInstance().loadCommonImg(view.getContext(), StrUtils.getResourceUrl(imageUrl),view);
     }
 
-    @BindingAdapter({"realImageUrl"})
-    public static void loadRealImageUrl(ImageView view, String imageUrl) {
-        GlideUtil.getInstance().loadCommonImg(view.getContext(), imageUrl,view);
+    abstract public String getImageUrl();
+
+    @BindingAdapter({"imgurl"})
+    public static void loadurlImg(ImageView view, String imageUrl){
+        GlideUtil.getInstance().loadCommonImg(view.getContext(),imageUrl,view);
     }
 }

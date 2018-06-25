@@ -50,20 +50,6 @@ class TestFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListener {
 
         EventBus.getDefault().post(MessageEvent(Message.TEST_MESSAGE))
 
-//        adapter!!.setOnRcyClickListener(object : BaseRecyclerAdapter.OnRcyClickListener {
-//            override fun onRcyClick(parent: ViewGroup, viewType: Int) {
-//                Toast.makeText(context, "点击了Item", Toast.LENGTH_LONG).show()
-//            }
-//        })
-//
-//        adapter!!.setOnRcyLongClickListener(object : BaseRecyclerAdapter.onRcyLongClickListener {
-//            override fun onRcyLongClick(parent: ViewGroup, viewType: Int): Boolean {
-//                Toast.makeText(context, "长按了Item", Toast.LENGTH_LONG).show()
-//                return true;
-//            }
-//
-//        })
-
         dataBinding!!.recyclerView.layoutManager = LinearLayoutManager(context)
         dataBinding!!.recyclerView.adapter = adapter
     }
