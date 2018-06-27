@@ -15,6 +15,10 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import org.greenrobot.eventbus.EventBus
 import java.util.*
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
+import android.view.ViewGroup
+import cn.com.base.simple.util.SpacesItemDecoration
 
 
 /**
@@ -24,7 +28,7 @@ import java.util.*
  */
 class TestFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListener {
 
-    val TAG:String ="TestFragment"
+    val TAG: String = "TestFragment"
     override val layoutId: Int
         get() = R.layout.fragment_test
 
@@ -40,12 +44,11 @@ class TestFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListener {
         dataBinding!!.refreshLayout.setOnLoadMoreListener(this)
 
         adapter = TestRecAdapter(context, list)
-        dataBinding!!.recyclerView.layoutManager=LinearLayoutManager(context)
-        dataBinding!!.recyclerView.adapter=adapter
+        dataBinding!!.recyclerView.layoutManager = LinearLayoutManager(context)
+        dataBinding!!.recyclerView.adapter = adapter
 
         EventBus.getDefault().post(MessageEvent(Message.TEST_MESSAGE))
-
-        dataBinding!!.recyclerView.layoutManager = LinearLayoutManager(context)
+        initRecyclerView()
         dataBinding!!.recyclerView.adapter = adapter
     }
 
@@ -65,6 +68,34 @@ class TestFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListener {
         }))
 
     }
+
+    /**
+     * recyclerview瀑布流配置
+     */
+    fun initRecyclerView() {
+        //设置margin
+        val marginLayoutParams =dataBinding!!.recyclerView.layoutParams as ViewGroup.MarginLayoutParams
+        marginLayoutParams.topMargin = this.resources.getDimensionPixelSize(R.dimen.dp_10)
+        marginLayoutParams.leftMargin = this.resources.getDimensionPixelSize(R.dimen.dp_10)
+        dataBinding!!.recyclerView.setLayoutParams(marginLayoutParams)
+        dataBinding!!.recyclerView.setHasFixedSize(true)
+        val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        dataBinding!!.recyclerView.setLayoutManager(staggeredGridLayoutManager)
+        //        recyclerView.setNestedScrollingEnabled(false); //嵌套解决滑动不流畅问题
+        //设置item边距
+        staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+        dataBinding!!.recyclerView.addItemDecoration(SpacesItemDecoration(this.resources.getDimensionPixelSize(R.dimen.dp_10)))
+        dataBinding!!.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView?,
+                                              newState: Int) {
+                super.onScrollStateChanged(recyclerView,
+                        newState)
+                staggeredGridLayoutManager.invalidateSpanAssignments()
+            }
+        }
+        )
+    }
+
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         initData()

@@ -1,5 +1,7 @@
 package cn.com.base.simple.bean
 
+import android.databinding.DataBindingComponent
+import cn.com.base.simple.databinding.WorkInfoAdapter
 
 
 /**
@@ -7,7 +9,8 @@ package cn.com.base.simple.bean
  * @date : 2017/12/25 19:50
  * @description :作品信息
  */
-class WorkInfo : ImageModel() {
+class WorkInfo {
+
 
     /**
      * comments : 0
@@ -61,10 +64,6 @@ class WorkInfo : ImageModel() {
     val tid: Int = 0
     val uid: Long = 0
     val width: Int = 0
-
-    override fun getImageUrl(): String? {
-        return cover
-    }
 
 
 }

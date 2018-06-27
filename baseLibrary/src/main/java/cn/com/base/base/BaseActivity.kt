@@ -81,10 +81,13 @@ abstract class BaseActivity : AppCompatActivity() {
         mActivityBinding!!.container!!.addView(mDataBinding!!.root)
         //注册网络监听
         registerNetWorkReceiver()
+        initTitle();
         initView()
         initData()
      
     }
+
+
 
     /**
      * 注册网络监听
@@ -251,6 +254,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract fun initData()
 
+    protected abstract fun initTitle()
 
     inner class NetWorkReceiver : BroadcastReceiver()
     {

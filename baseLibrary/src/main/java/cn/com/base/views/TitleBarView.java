@@ -40,7 +40,7 @@ public class TitleBarView extends LinearLayout implements View.OnClickListener {
 
 
     //不显示按钮
-    private static final int DISPLAY_AIR = 0;
+    public static final int DISPLAY_AIR = 0;
     //显示文本按钮
     private static final int DISPLAY_TV  = 1;
     //图片按钮

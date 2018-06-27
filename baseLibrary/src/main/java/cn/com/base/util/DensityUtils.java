@@ -24,13 +24,15 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
+import cn.com.base.LibApplication;
+
 public final class DensityUtils {
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
-    public static int dip2px(Context context, float dpValue) {
-        Resources r = context.getResources();
+    public static int dip2px(float dpValue) {
+        Resources r = LibApplication.application.getResources();
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 dpValue, r.getDisplayMetrics());
         return (int) px;
@@ -39,51 +41,50 @@ public final class DensityUtils {
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
      */
-    public static int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
+    public static int px2dip(float pxValue) {
+        final float scale = LibApplication.application.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 sp
      */
-    public static int px2sp(Context context, float pxValue) {
-        float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+    public static int px2sp( float pxValue) {
+        float fontScale = LibApplication.application.getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }
 
     /**
      * 根据手机的分辨率从 sp 的单位 转成为 px
      */
-    public static int sp2px(Context context, float spValue) {
-        float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+    public static int sp2px(float spValue) {
+        float fontScale = LibApplication.application.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
     /**
      * 获取dialog宽度
      */
-    public static int getDialogW(Context aty) {
+    public static int getDialogW() {
         DisplayMetrics dm = new DisplayMetrics();
-        dm = aty.getResources().getDisplayMetrics();
+        dm = LibApplication.application.getResources().getDisplayMetrics();
         int w = dm.widthPixels - 100;
-        // int w = aty.getWindowManager().getDefaultDisplay().getWidth() - 100;
         return w;
     }
 
     /**
      * 获取屏幕宽度
      */
-    public static int getScreenW(Context aty) {
-        DisplayMetrics dm = aty.getResources().getDisplayMetrics();
+    public static int getScreenW() {
+        DisplayMetrics dm = LibApplication.application.getResources().getDisplayMetrics();
         return dm.widthPixels;
     }
 
     /**
      * 获取屏幕高度
      */
-    public static int getScreenH(Context aty) {
-        DisplayMetrics dm = aty.getResources().getDisplayMetrics();
+    public static int getScreenH() {
+        DisplayMetrics dm = LibApplication.application.getResources().getDisplayMetrics();
         return dm.heightPixels;
     }
 
@@ -91,11 +92,10 @@ public final class DensityUtils {
     /**
      * 状态栏的高度
      *
-     * @param context
      * @return
      */
-    public static int getStatusBarHeight(Context context) {
-        Resources resources  = context.getResources();
+    public static int getStatusBarHeight() {
+        Resources resources  = LibApplication.application.getResources();
         int       resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
         int       height     = resources.getDimensionPixelSize(resourceId);
         return height;
@@ -104,11 +104,10 @@ public final class DensityUtils {
     /**
      * 得到底部导航栏的高度
      *
-     * @param context
      * @return
      */
-    public static int getNavigationBarHeight(Context context) {
-        Resources resources  = context.getResources();
+    public static int getNavigationBarHeight() {
+        Resources resources  = LibApplication.application.getResources();
         int       resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
         int       height     = resources.getDimensionPixelSize(resourceId);
         return height;
@@ -140,17 +139,5 @@ public final class DensityUtils {
         return rate < 15 ? 15 : rate; //字体太小也不好看的  1080 3
     }
 
-
-    /**
-     * 计算图片的显示高度
-     *
-     * @param context
-     * @param weight   图片所在布局所占比重
-     * @param marginDp 图片所在布局相对于屏幕宽度的margin
-     * @return
-     */
-    public static int getImageWidth(Context context, int weight, float marginDp) {
-        return px2dip(context, (getScreenW(context) - dip2px(context, marginDp) * weight * 2) / 2);
-    }
 
 }

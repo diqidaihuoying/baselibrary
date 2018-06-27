@@ -24,6 +24,11 @@ class MainActivity : BaseActivity() {
 
     protected var testBean: TestBean? = null
 
+    override fun initTitle() {
+        mActivityBinding!!.titlebar.setTitlename("才艺大道")
+        mActivityBinding!!.titlebar.setDisplayRight(TitleBarView.DISPLAY_AIR)
+    }
+
     override fun initView() {
         dataBinding = mDataBinding as ActivityMainBinding?
         tabAdapter = TabAdapter(supportFragmentManager, fragments, titles)
@@ -51,7 +56,6 @@ class MainActivity : BaseActivity() {
                 )
                 dataBinding!!.viewPager.adapter = tabAdapter
                 dataBinding!!.tabLayout.setupWithViewPager(dataBinding!!.viewPager);
-
             }
         }))
     }

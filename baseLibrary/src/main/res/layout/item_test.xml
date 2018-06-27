@@ -3,29 +3,88 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="workInfo"
             type="cn.com.base.simple.bean.WorkInfo" />
-
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
         android:layout_width="match_parent"
-        android:paddingBottom="10dp"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true">
 
-        <TextView
-            android:text="@{workInfo.name}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            app:imageUrl="@{workInfo.imageUrl}"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:scaleType="centerCrop"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <FrameLayout
+                android:id="@+id/layout_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_200"
+                    app:layoutHeight="@{workInfo}"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{workInfo.cover}" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/ic_test_video"
+                    app:videoVisibility="@{workInfo.type}" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/ic_test_music"
+                    app:voiceVisibility="@{workInfo.type}" />
+            </FrameLayout>
+
+            <TextView
+                android:lines="1"
+                android:layout_marginTop="@dimen/dp_2"
+                android:layout_marginBottom="@dimen/dp_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:summary="@{workInfo.summary}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_4">
+
+                <TextView
+                    android:id="@+id/tv_see_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/ic_test_eye"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="@{String.valueOf(workInfo.pv)}" />
+
+                <TextView
+                    android:id="@+id/tv_flower_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/ic_test_small_flower"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="@{String.valueOf(workInfo.favors)}" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 </layout>
