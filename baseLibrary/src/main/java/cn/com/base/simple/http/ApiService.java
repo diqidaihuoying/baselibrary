@@ -6,6 +6,7 @@ import java.util.Map;
 
 import cn.com.base.http.HttpResult;
 import cn.com.base.simple.bean.Interest;
+import cn.com.base.simple.bean.WorkDetail;
 import cn.com.base.simple.bean.WorkInfo;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -35,6 +36,6 @@ public interface ApiService {
      * 作品详情
      */
     @GET("topic/v1/detail")
-    Observable<HttpResult<String>> getWorkDetail(@QueryMap Map<String, Object> map);
+    Observable<HttpResult<WorkDetail>> getWorkDetail(@QueryMap Map<String, Object> map);
 
 }

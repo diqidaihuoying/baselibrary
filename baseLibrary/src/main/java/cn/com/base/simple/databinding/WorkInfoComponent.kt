@@ -13,13 +13,9 @@ import cn.com.base.util.DensityUtils
  * 描述: 对workinfo做处理操作
  * 作者:wantao
  */
-class WorkInfoAdapter :ImageModel(), Component{
+class WorkInfoComponent :ImageComponent(){
 
-    override fun getWorkInfoAdapter(): WorkInfoAdapter? {
-        return this
-    }
-
-    override fun getImageModel(): ImageModel? {
+    override fun getWorkInfoComponent(): WorkInfoComponent? {
         return this
     }
 

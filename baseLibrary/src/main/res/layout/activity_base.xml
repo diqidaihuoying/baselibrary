@@ -17,7 +17,7 @@
             app:leftbtnName="发送1"
             app:leftdisplay="air"
             app:rightbtnName="发送2"
-            app:rightdisplay="tv"
+            app:rightdisplay="air"
             app:leftbtnColor="#FFFFFF"
             app:rightbtnColor="#FFFFFF"
             app:titlename="我是标题"

@@ -77,7 +77,7 @@ abstract class BaseActivity : AppCompatActivity() {
         //设置沉浸式状态栏
         setRootView()
         //添加内容布局
-        mDataBinding= DataBindingUtil.inflate(LayoutInflater.from(this), layoutId, mActivityBinding!!.root as ViewGroup,false)
+        mDataBinding=getDatabinding(LayoutInflater.from(this),layoutId,mActivityBinding!!.root as ViewGroup,false);
         mActivityBinding!!.container!!.addView(mDataBinding!!.root)
         //注册网络监听
         registerNetWorkReceiver()
@@ -87,6 +87,12 @@ abstract class BaseActivity : AppCompatActivity() {
      
     }
 
+    /**
+     * 可重写
+     */
+    open protected fun getDatabinding(from: LayoutInflater, layoutId: Int, viewGroup: ViewGroup, b: Boolean): ViewDataBinding? {
+        return DataBindingUtil.inflate(from,layoutId,viewGroup,b)
+    }
 
 
     /**

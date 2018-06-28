@@ -10,7 +10,7 @@ import cn.com.base.R
 import cn.com.base.base.BaseRecyclerAdapter
 import cn.com.base.databinding.ItemTestBinding
 import cn.com.base.simple.bean.WorkInfo
-import cn.com.base.simple.databinding.WorkInfoAdapter
+import cn.com.base.simple.databinding.WorkInfoComponent
 
 /**
  * 创建日期：2018/6/13 on 15:22
@@ -39,14 +39,12 @@ class TestRecAdapter(context: Context?, list: List<WorkInfo>) : BaseRecyclerAdap
         testViewHolder.itemTestBinding!!.executePendingBindings()
     }
 
-
-
     internal inner class TestViewHolder(outer: View) : BaseRecyclerAdapter.BaseRecyclerHolder(outer) {
         var itemTestBinding: ItemTestBinding? = null
     }
 
     override fun getDataBinding(parent: ViewGroup, viewType: Int): ViewDataBinding {
-        return DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(context), getlayoutId(viewType), parent, false,WorkInfoAdapter())
+        return DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(context), getlayoutId(viewType), parent, false,WorkInfoComponent())
     }
 
 }

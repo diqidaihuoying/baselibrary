@@ -4,13 +4,14 @@ import android.databinding.BindingAdapter
 import android.widget.ImageView
 import cn.com.base.glide.GlideUtil
 import cn.com.base.simple.util.StrUtils
+import cn.com.base.util.LogUtil
 
 /**
  * author      : wantao
  * date        : 2017/11/8 14:25
  * description : 图片
  */
-open  class ImageModel {
+open  class BaseImageModel {
 
     /**
      * 图片加载
@@ -19,8 +20,7 @@ open  class ImageModel {
      * @param imageUrl
      */
     @BindingAdapter("imageUrl")
-    fun loadImage(view: ImageView, imageUrl: String) {
+    fun loadImage(view: ImageView, imageUrl: String?) {
         GlideUtil.getInstance().loadCommonImg(view.context, StrUtils.getResourceUrl(imageUrl), view)
     }
-
 }

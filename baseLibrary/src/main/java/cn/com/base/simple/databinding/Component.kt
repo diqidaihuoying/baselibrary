@@ -9,13 +9,12 @@ import android.databinding.DataBindingComponent
  */
 interface Component :DataBindingComponent
 {
-     override fun getWorkInfoAdapter(): WorkInfoAdapter? {
+    open override fun getBaseImageModel(): BaseImageModel ?{
         return null
     }
 
-     override fun getImageModel(): ImageModel? {
-        return null
+    open override fun getWorkInfoComponent(): WorkInfoComponent? {
+       return null
     }
-
 }
 

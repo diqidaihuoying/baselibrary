@@ -38,11 +38,17 @@ abstract class BaseFragment : Fragment() {
         // Inflate the layout for this fragment
         mFragmentDataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_base, container, false)
         //添加内容布局
-        mDataBinding= DataBindingUtil.inflate(inflater, layoutId, mFragmentDataBinding!!.root as ViewGroup,false)
+        mDataBinding= getDatabinding(inflater, layoutId, mFragmentDataBinding!!.root as ViewGroup,false)
         mFragmentDataBinding!!.container!!.addView(mDataBinding!!.root)
         initView()
         initData()
         return mFragmentDataBinding?.root
+    }
+    /**
+     * 可重写
+     */
+    open protected fun getDatabinding(from: LayoutInflater?, layoutId: Int, viewGroup: ViewGroup, b: Boolean): ViewDataBinding? {
+        return DataBindingUtil.inflate(from!!,layoutId,viewGroup,b)
     }
 
     protected fun <T> newObserver(callback: ResponseCallback<T>): Observer<T> {
