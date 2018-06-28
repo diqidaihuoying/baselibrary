@@ -47,7 +47,4 @@ class TestRecAdapter(context: Context?, list: List<WorkInfo>) : BaseRecyclerAdap
         return DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(context), getlayoutId(viewType), parent, false,WorkInfoComponent())
     }
 
-
-
-
 }
