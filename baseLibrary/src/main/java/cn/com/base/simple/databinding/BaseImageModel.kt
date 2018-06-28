@@ -4,7 +4,6 @@ import android.databinding.BindingAdapter
 import android.widget.ImageView
 import cn.com.base.glide.GlideUtil
 import cn.com.base.simple.util.StrUtils
-import cn.com.base.util.LogUtil
 
 /**
  * author      : wantao
