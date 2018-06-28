@@ -12,7 +12,8 @@
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".simple.activity.WorkDetailActivity">
@@ -22,5 +23,5 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_200" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </layout>
