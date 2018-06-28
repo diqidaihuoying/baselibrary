@@ -32,9 +32,8 @@
                     android:id="@+id/iv_cover"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_200"
-                    app:layoutHeight="@{workInfo}"
-                    android:scaleType="centerCrop"
-                    app:imageUrl="@{workInfo.cover}" />
+                    app:imageUrl="@{workInfo.cover}"
+                    app:layout_height="@{workInfo}" />
 
                 <ImageView
                     android:layout_width="@dimen/dp_50"

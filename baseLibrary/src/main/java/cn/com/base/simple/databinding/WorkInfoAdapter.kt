@@ -13,10 +13,14 @@ import cn.com.base.util.DensityUtils
  * 描述: 对workinfo做处理操作
  * 作者:wantao
  */
-open class WorkInfoAdapter :ImageModel(){
+class WorkInfoAdapter :ImageModel(), Component{
 
-    override fun getWorkInfoAdapter(): WorkInfoAdapter {
-        return  this
+    override fun getWorkInfoAdapter(): WorkInfoAdapter? {
+        return this
+    }
+
+    override fun getImageModel(): ImageModel? {
+        return this
     }
 
     // 瀑布流的图片宽度
@@ -31,7 +35,7 @@ open class WorkInfoAdapter :ImageModel(){
         }
     }
 
-    @BindingAdapter("layoutHeight")
+    @BindingAdapter("layout_height")
     fun setLayoutHeight(view: View, workInfo: WorkInfo) {
         val layoutParams = view.layoutParams
         var toInt = (workInfo.height * waterPullImageWidth / workInfo.width).toInt()

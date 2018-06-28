@@ -21,7 +21,7 @@ abstract class BaseRecyclerAdapter<T>(protected var context: Context?, protected
      */
 //    protected abstract val layoutId: Int
 
-    protected abstract fun getlayoutId(position: Int): Int
+    protected abstract fun getlayoutId(viewType: Int): Int
 
     var clicklistener: OnRcyClickListener? = null
 
