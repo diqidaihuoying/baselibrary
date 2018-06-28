@@ -18,8 +18,9 @@ public class GlideUtil {
     private static GlideUtil glideUtil;
 
     private RequestOptions colorOptions = new RequestOptions()
-            .placeholder(ColorUtils.ColorId())
-            .error(ColorUtils.ColorId());
+            .placeholder(ColorUtils.getImageDrawable())
+            .centerCrop()
+            .error(ColorUtils.getImageDrawable());
 
     public static GlideUtil getInstance() {
         if (glideUtil == null) {
