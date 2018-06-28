@@ -1,8 +1,5 @@
 package cn.com.base.simple.bean
 
-import android.databinding.DataBindingComponent
-import cn.com.base.simple.databinding.WorkInfoAdapter
-
 
 /**
  * @author : TJ

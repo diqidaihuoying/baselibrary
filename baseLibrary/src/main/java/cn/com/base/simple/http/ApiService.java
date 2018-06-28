@@ -9,6 +9,7 @@ import cn.com.base.simple.bean.Interest;
 import cn.com.base.simple.bean.WorkInfo;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.QueryMap;
 
 /**
@@ -29,4 +30,11 @@ public interface ApiService {
      */
     @GET("topic/v1/page")
     Observable<HttpResult<List<WorkInfo>>> getWorkList(@QueryMap Map<String, Object> map);
+
+    /**
+     * 作品详情
+     */
+    @GET("topic/v1/detail")
+    Observable<HttpResult<String>> getWorkDetail(@QueryMap Map<String, Object> map);
+
 }

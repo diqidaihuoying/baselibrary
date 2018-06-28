@@ -51,7 +51,7 @@ class MainActivity : BaseActivity() {
                 result.forEach(
                         {
                             titles!!.add(it.name)
-                            fragments!!.add(TestFragment())
+                            fragments!!.add(TestFragment.newInstance(it.id))
                         }
                 )
                 dataBinding!!.viewPager.adapter = tabAdapter

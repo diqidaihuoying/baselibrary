@@ -34,7 +34,10 @@ open class WorkInfoAdapter :ImageModel(){
     @BindingAdapter("layoutHeight")
     fun setLayoutHeight(view: View, workInfo: WorkInfo) {
         val layoutParams = view.layoutParams
-        layoutParams.height = ( workInfo.height * waterPullImageWidth / workInfo.width).toInt()
+        var toInt = (workInfo.height * waterPullImageWidth / workInfo.width).toInt()
+        if(toInt<(DensityUtils.dip2px(150f)))
+            toInt=DensityUtils.dip2px(150f)
+        layoutParams.height = toInt
         view.layoutParams = layoutParams
     }
 
