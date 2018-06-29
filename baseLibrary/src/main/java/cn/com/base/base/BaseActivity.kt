@@ -87,7 +87,7 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * 可重写
+     * 可重写，添加component
      */
     open protected fun getDatabinding(from: LayoutInflater, layoutId: Int, viewGroup: ViewGroup, b: Boolean): ViewDataBinding? {
         return DataBindingUtil.inflate(from,layoutId,viewGroup,b)
