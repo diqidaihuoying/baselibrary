@@ -2,7 +2,6 @@ package cn.com.base.simple.bean
 
 import cn.com.base.R
 import cn.com.base.util.DateUtil
-import cn.com.base.util.LogUtil
 
 /**
  * 创建日期：2018/6/28 on 14:34
@@ -10,47 +9,46 @@ import cn.com.base.util.LogUtil
  * 作者:wantao
  */
 
-class WorkDetail(
-        var avatar: String,
-        var comments: Int,
-        var cover: String,
-        var duration: Int,
-        var favorites: Int,
-        var favors: Int,
-        var height: Int,
-        var hid: Int,
-        var id: Int,
-        var imageList: List<String>,
-        var isFavorite: Int,
-        var isRecommend: Int,
-        var name: String,
-        var path: String,
-        var pv: Int,
-        var size: Int,
-        var state: Int,
-        var summary: String,
-        var type: Int,
-        var uid: Int,
-        var width: Int,
-        var isFavor: Int,
-        var isFollow: Int,
-        var createtime: String
-) {
-    init {
-        LogUtil.e("WorkDetail", createtime)
-        isFavor =
-                if (isFavor == 0)
-                    R.mipmap.ic_test_flower_unselected
-                else
-                    R.mipmap.ic_test_flower_selected
+class WorkDetail {
 
-        isFollow =
-                if (isFollow == 0)
-                    R.mipmap.ic_test_collect_unselected
-                else
-                    R.mipmap.ic_test_collect_selected
-
-        createtime = DateUtil.getTimeDescrition(createtime.toLong())
-    }
-
+    var avatar: String = ""
+    var categoryName: String = ""
+    var comments: Int = 0
+    var cover: String = ""
+    var createtime: String = ""
+        get() {
+            return DateUtil.getTimeDescrition(createtime.toLong())
+        }
+    var duration: Int = 0
+    var favorites: Int = 0
+    var favors: Int = 0
+    var height: Int = 0
+    var hid: Int = 0
+    var id: Int = 0
+    var imageList: List<String> = listOf()
+    var isFavor: Int = 0
+        get() {
+            if (field == 0)
+                return R.mipmap.ic_test_flower_unselected
+            else
+                return R.mipmap.ic_test_flower_selected
+        }
+    var isFavorite: Int = 0
+    var isFollow: Int = 0
+        get() {
+            if (field == 0)
+                return R.mipmap.ic_test_collect_unselected
+            else
+                return R.mipmap.ic_test_collect_selected
+        }
+    var isRecommend: Int = 0
+    var name: String = ""
+    var path: String = ""
+    var pv: Int = 0
+    var size: Int = 0
+    var state: Int = 0
+    var summary: String = ""
+    var type: Int = 0
+    var uid: Int = 0
+    var width: Int = 0
 }

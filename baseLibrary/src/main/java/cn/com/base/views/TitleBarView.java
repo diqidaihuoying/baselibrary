@@ -124,7 +124,7 @@ public class TitleBarView extends LinearLayout implements View.OnClickListener {
      * 初始化布局
      */
     private void initview(AttributeSet attrs) {
-        inflate(getContext(), R.layout.titlebar_layout, this);
+        inflate(getContext(), R.layout.layout_titlebar, this);
 
 
         mLeftBtn = findViewById(R.id.leftBtn);
