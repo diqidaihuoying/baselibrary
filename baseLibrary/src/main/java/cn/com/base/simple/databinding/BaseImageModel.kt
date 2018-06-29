@@ -22,4 +22,15 @@ open  class BaseImageModel {
     fun loadImage(view: ImageView, imageUrl: String?) {
         GlideUtil.getInstance().loadCommonImg(view.context, StrUtils.getResourceUrl(imageUrl), view)
     }
+
+    /**
+     * 头像加载
+     *
+     * @param view
+     * @param imageUrl
+     */
+    @BindingAdapter("imageUrlAvatar")
+    fun loadImageAvatar(view: ImageView, userId: Int?) {
+        GlideUtil.getInstance().loadCircleImg(view.context, StrUtils.getAvatar(userId!!), view)
+    }
 }

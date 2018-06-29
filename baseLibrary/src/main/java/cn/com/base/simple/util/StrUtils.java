@@ -52,4 +52,13 @@ public class StrUtils {
         return StrUtils.plusString(HttpConstants.INSTANCE.getBASE_URL(), path, "&appkey=", HttpConstants.INSTANCE.getAPPKEY(), "&sign=", HttpConstants.INSTANCE.getSIGN());
     }
 
+    /**
+     * 拼接头像地址
+     * @param id
+     * @return
+     */
+    public static String getAvatar(int id) {
+        String s=StrUtils.plusString(HttpConstants.INSTANCE.getAUTHOR_BASE_URL(), "v1/getAvatar?id=", String.valueOf(id), "&appkey=",  HttpConstants.INSTANCE.getAPPKEY(), "&sign=" +  HttpConstants.INSTANCE.getSIGN());
+        return s;
+    }
 }

@@ -1,5 +1,8 @@
 package cn.com.base.simple.bean
 
+import cn.com.base.R
+import cn.com.base.util.DateUtil
+
 
 /**
  * @author : TJ
@@ -61,6 +64,5 @@ class WorkInfo {
     val tid: Int = 0
     val uid: Long = 0
     val width: Int = 0
-
 
 }

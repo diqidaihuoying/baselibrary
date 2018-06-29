@@ -755,4 +755,28 @@ public class DateUtil {
         }
         return timeStamp;
     }
+
+    public static String getTimeDescrition(long timeMillis) {
+
+        long delta = (System.currentTimeMillis() - timeMillis) / 1000;
+        if (delta <= 0)
+            return "";
+        if (delta / (60 * 60 * 24 * 30) > 0) {
+            return delta / (60 * 60 * 24 * 30) + "个月前";
+        }
+        if (delta / (60 * 60 * 24 * 7) > 0) {
+            return delta / (60 * 60 * 24 * 7) + "周前";
+        }
+        if (delta / (60 * 60 * 24) > 0) {
+            return delta / (60 * 60 * 24) + "天前";
+        }
+        if (delta / (60 * 60) > 0) {
+            return delta / (60 * 60) + "小时前";
+        }
+        if (delta / (60) > 0) {
+
+            return delta / (60) + "分钟前";
+        }
+        return "刚刚";
+    }
 }

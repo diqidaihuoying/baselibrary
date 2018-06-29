@@ -11,6 +11,7 @@ import cn.com.base.util.MD5Utils
  object
 HttpConstants {
 
+    val AUTHOR_BASE_URL = "http://open.cappu.cn/"
     val BASE_URL = "http://show.cappu.cn/acqierement/"
     val APPKEY = "a63eb2115ea940a69d10feac79a57a25"
     val APP_SECRET = "aa0c1b2a6f934b3c9c33821629de1c8c"

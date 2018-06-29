@@ -4,8 +4,10 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 
+import cn.com.base.R;
 import cn.com.base.util.ColorUtils;
 
 /**
@@ -35,6 +37,23 @@ public class GlideUtil {
                 .into(imageView);
     }
 
+
+    /**
+     * 加载圆形图像
+     * @param context
+     * @param url
+     * @param imageView
+     */
+    public void loadCircleImg(Context context, String url, ImageView imageView)
+    {
+        RequestOptions requestOptions = RequestOptions.bitmapTransform(new CircleCrop())
+                .placeholder(R.mipmap.ic_default_head_portrait)
+                .error(R.mipmap.ic_default_head_portrait);
+        Glide.with(context)
+                .load(url)
+                .apply(requestOptions)
+                .into(imageView);
+    }
 
 
 }
