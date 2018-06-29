@@ -40,7 +40,6 @@ import pub.devrel.easypermissions.PermissionRequest
 
 
 abstract class BaseActivity : AppCompatActivity() {
-
     /**
      * 使用CompositeSubscription来持有所有的Subscriptions
      */
