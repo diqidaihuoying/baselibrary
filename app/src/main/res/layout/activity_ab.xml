@@ -3,19 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.ABActivity">
 
-        <!--<ImageView-->
-            <!--app:imageUrlReal="@{`http://img.zcool.cn/community/0142135541fe180000019ae9b8cf86.jpg@1280w_1l_2o_100sh.png`}"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="200dp" />-->
+        <ImageView
+            app:imageUrlReal="@{`http://img.zcool.cn/community/0142135541fe180000019ae9b8cf86.jpg@1280w_1l_2o_100sh.png`}"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
 
         <TextView
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </layout>
