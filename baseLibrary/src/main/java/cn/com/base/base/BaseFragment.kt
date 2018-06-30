@@ -22,10 +22,10 @@ import io.reactivex.schedulers.Schedulers
 /**
  * A simple [Fragment] subclass.
  */
-public abstract class BaseFragment : Fragment() {
+public abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
 
-    protected var mDataBinding: ViewDataBinding? = null
-    protected var mFragmentDataBinding :FragmentBaseBinding?= null
+    protected var mDataBinding: B? = null
+    private var mFragmentDataBinding :FragmentBaseBinding?= null
     protected abstract val layoutId: Int
     /**
      * 使用CompositeSubscription来持有所有的Subscriptions
@@ -47,7 +47,7 @@ public abstract class BaseFragment : Fragment() {
     /**
      * 可重写
      */
-    open protected fun getDatabinding(from: LayoutInflater?, layoutId: Int, viewGroup: ViewGroup, b: Boolean): ViewDataBinding? {
+    open protected fun getDatabinding(from: LayoutInflater?, layoutId: Int, viewGroup: ViewGroup, b: Boolean): B? {
         return DataBindingUtil.inflate(from!!,layoutId,viewGroup,b)
     }
 

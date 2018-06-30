@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name="cn.com.base.simple.activity.MainActivity">
+
         </activity>
         <activity android:name=".activity.ABActivity">
             <intent-filter>

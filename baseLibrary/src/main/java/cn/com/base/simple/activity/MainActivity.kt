@@ -1,10 +1,12 @@
 package cn.com.base.simple.activity
+import android.databinding.ViewDataBinding
 import android.widget.Toast
 import cn.com.base.R
 import cn.com.base.base.BaseActivity
 import cn.com.base.base.BaseFragment
 import cn.com.base.base.TabAdapter
 import cn.com.base.databinding.ActivityMainBinding
+import cn.com.base.databinding.FragmentTestBinding
 import cn.com.base.http.ResponseCallback
 import cn.com.base.simple.bean.Interest
 import cn.com.base.simple.bean.TestBean
@@ -20,7 +22,7 @@ class MainActivity : BaseActivity <ActivityMainBinding>() {
 
     protected var tabAdapter: TabAdapter? = null
     protected var titles: MutableList<String>? = mutableListOf()
-    protected var fragments: MutableList<BaseFragment>? = mutableListOf()
+    protected var fragments: MutableList<BaseFragment<ViewDataBinding>>? = mutableListOf()
 
     protected var testBean: TestBean? = null
 
@@ -49,7 +51,7 @@ class MainActivity : BaseActivity <ActivityMainBinding>() {
                 result.forEach(
                         {
                             titles!!.add(it.name)
-                            fragments!!.add(TestFragment.newInstance(it.id))
+                            fragments!!.add(TestFragment.newInstance(it.id) as BaseFragment<ViewDataBinding>)
                         }
                 )
                 mDataBinding!!.viewPager.adapter = tabAdapter
@@ -57,6 +59,8 @@ class MainActivity : BaseActivity <ActivityMainBinding>() {
             }
         }))
     }
+
+
 
 }
 

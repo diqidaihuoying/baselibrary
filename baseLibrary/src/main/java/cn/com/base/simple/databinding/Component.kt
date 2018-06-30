@@ -18,5 +18,8 @@ interface Component:DataBindingComponent
     open  override fun getWorkInfoComponent(): WorkInfoComponent? {
        return null
     }
+
+
+
 }
 

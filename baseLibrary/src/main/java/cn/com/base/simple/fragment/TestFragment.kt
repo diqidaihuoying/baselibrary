@@ -1,6 +1,7 @@
 package cn.com.base.simple.fragment
 
 import android.content.Intent
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -30,7 +31,7 @@ import java.util.*
  * 描述:
  * 作者:wantao
  */
-class TestFragment: BaseFragment(), OnRefreshListener, OnLoadMoreListener ,BaseRecyclerAdapter.OnRcyClickListener{
+class TestFragment : BaseFragment<FragmentTestBinding>(), OnRefreshListener, OnLoadMoreListener ,BaseRecyclerAdapter.OnRcyClickListener{
 
 
 
@@ -38,15 +39,13 @@ class TestFragment: BaseFragment(), OnRefreshListener, OnLoadMoreListener ,BaseR
     override val layoutId: Int
         get() = R.layout.fragment_test
 
-    var dataBinding: FragmentTestBinding? = null
     var list: MutableList<WorkInfo> = mutableListOf()
     var adapter: TestRecAdapter? = null
     var pageSize: Int? = 10
     var currentPage: Int? = 0
 
     companion object {
-        fun newInstance(id: Int):TestFragment
-        {
+         fun newInstance(id: Int): TestFragment {
             var testFragment=TestFragment();
             var bundle=Bundle();
             bundle.putInt("id",id)
@@ -56,18 +55,17 @@ class TestFragment: BaseFragment(), OnRefreshListener, OnLoadMoreListener ,BaseR
     }
 
     override fun initView() {
-        dataBinding = mDataBinding as FragmentTestBinding?
-        dataBinding!!.refreshLayout.setOnRefreshListener(this)
-        dataBinding!!.refreshLayout.setOnLoadMoreListener(this)
+        mDataBinding!!.refreshLayout.setOnRefreshListener(this)
+        mDataBinding!!.refreshLayout.setOnLoadMoreListener(this)
 
         adapter = TestRecAdapter(context, list)
         adapter!!.setOnRcyClickListener(this)
-        dataBinding!!.recyclerView.layoutManager = LinearLayoutManager(context)
-        dataBinding!!.recyclerView.adapter = adapter
+        mDataBinding!!.recyclerView.layoutManager = LinearLayoutManager(context)
+        mDataBinding!!.recyclerView.adapter = adapter
 
         EventBus.getDefault().post(MessageEvent(Message.TEST_MESSAGE))
         initRecyclerView()
-        dataBinding!!.recyclerView.adapter = adapter
+        mDataBinding!!.recyclerView.adapter = adapter
     }
 
     override fun initData() {
@@ -92,18 +90,18 @@ class TestFragment: BaseFragment(), OnRefreshListener, OnLoadMoreListener ,BaseR
      */
     fun initRecyclerView() {
         //设置margin
-        val marginLayoutParams =dataBinding!!.recyclerView.layoutParams as ViewGroup.MarginLayoutParams
+        val marginLayoutParams =mDataBinding!!.recyclerView.layoutParams as ViewGroup.MarginLayoutParams
         marginLayoutParams.topMargin = this.resources.getDimensionPixelSize(R.dimen.dp_10)
         marginLayoutParams.leftMargin = this.resources.getDimensionPixelSize(R.dimen.dp_10)
-        dataBinding!!.recyclerView.setLayoutParams(marginLayoutParams)
-        dataBinding!!.recyclerView.setHasFixedSize(true)
+        mDataBinding!!.recyclerView.setLayoutParams(marginLayoutParams)
+        mDataBinding!!.recyclerView.setHasFixedSize(true)
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        dataBinding!!.recyclerView.setLayoutManager(staggeredGridLayoutManager)
+        mDataBinding!!.recyclerView.setLayoutManager(staggeredGridLayoutManager)
         //        recyclerView.setNestedScrollingEnabled(false); //嵌套解决滑动不流畅问题
         //设置item边距
         staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-        dataBinding!!.recyclerView.addItemDecoration(SpacesItemDecoration(this.resources.getDimensionPixelSize(R.dimen.dp_10)))
-        dataBinding!!.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        mDataBinding!!.recyclerView.addItemDecoration(SpacesItemDecoration(this.resources.getDimensionPixelSize(R.dimen.dp_10)))
+        mDataBinding!!.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView?,
                                               newState: Int) {
                 super.onScrollStateChanged(recyclerView,
@@ -117,11 +115,11 @@ class TestFragment: BaseFragment(), OnRefreshListener, OnLoadMoreListener ,BaseR
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         initData()
-        dataBinding!!.refreshLayout.finishRefresh(1000, true)//传入false表示刷新失败
+        mDataBinding!!.refreshLayout.finishRefresh(1000, true)//传入false表示刷新失败
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
-        dataBinding!!.refreshLayout.finishLoadMore(1000)//传入false表示刷新失败
+        mDataBinding!!.refreshLayout.finishLoadMore(1000)//传入false表示刷新失败
     }
 
     override fun onRcyClick(parent: ViewGroup, viewType: Int) {
