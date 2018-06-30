@@ -8,7 +8,6 @@ import cn.com.base.BR
 import cn.com.base.LibApplication
 import cn.com.base.R
 import cn.com.base.util.DateUtil
-import cn.com.base.util.LogUtil
 
 /**
  * 创建日期：2018/6/30 on 10:28

@@ -23,9 +23,11 @@ import cn.com.base.R
 import cn.com.base.databinding.ActivityBaseBinding
 import cn.com.base.http.HttpResult
 import cn.com.base.http.ResponseCallback
+import cn.com.base.simple.databinding.Component
 import cn.com.base.util.CurActivityManager
 import cn.com.base.util.NetWorkUtil
 import cn.com.base.util.SystemBarTintManager
+import cn.com.base.views.TitleBarView
 import com.umeng.analytics.MobclickAgent
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -38,8 +40,7 @@ import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
 
-
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     /**
      * 使用CompositeSubscription来持有所有的Subscriptions
      */
@@ -56,12 +57,12 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * basebinding
      */
-    protected var mActivityBinding: ActivityBaseBinding ? = null
+    private var mActivityBinding: ActivityBaseBinding ? = null
 
     /**
      * 内容binding
      */
-    protected var mDataBinding :ViewDataBinding ?=null
+    protected var mDataBinding :B ?=null
     
     /**
      * 网络监听
@@ -80,7 +81,7 @@ abstract class BaseActivity : AppCompatActivity() {
         mActivityBinding!!.container!!.addView(mDataBinding!!.root)
         //注册网络监听
         registerNetWorkReceiver()
-        initTitle();
+        initTitle(mActivityBinding!!.titlebar);
         initView()
         initData()
      
@@ -89,7 +90,7 @@ abstract class BaseActivity : AppCompatActivity() {
     /**
      * 可重写，添加component
      */
-    open protected fun getDatabinding(from: LayoutInflater, layoutId: Int, viewGroup: ViewGroup, b: Boolean): ViewDataBinding? {
+    open protected fun getDatabinding(from: LayoutInflater, layoutId: Int, viewGroup: ViewGroup, b: Boolean): B? {
         return DataBindingUtil.inflate(from,layoutId,viewGroup,b)
     }
 
@@ -259,7 +260,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract fun initData()
 
-    protected abstract fun initTitle()
+    protected abstract fun initTitle(titile:TitleBarView)
 
     inner class NetWorkReceiver : BroadcastReceiver()
     {

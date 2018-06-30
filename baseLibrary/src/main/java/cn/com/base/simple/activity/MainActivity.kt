@@ -8,32 +8,24 @@ import cn.com.base.databinding.ActivityMainBinding
 import cn.com.base.http.ResponseCallback
 import cn.com.base.simple.bean.Interest
 import cn.com.base.simple.bean.TestBean
+import cn.com.base.simple.databinding.ImageComponent
 import cn.com.base.simple.fragment.TestFragment
 import cn.com.base.simple.http.RetrofitHelp
 import cn.com.base.views.TitleBarView
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity <ActivityMainBinding>() {
 
     override val layoutId = R.layout.activity_main
 
-    private var dataBinding: ActivityMainBinding? = null
     protected var tabAdapter: TabAdapter? = null
     protected var titles: MutableList<String>? = mutableListOf()
     protected var fragments: MutableList<BaseFragment>? = mutableListOf()
 
     protected var testBean: TestBean? = null
 
-    override fun initTitle() {
-        mActivityBinding!!.titlebar.setTitlename("才艺大道")
-        mActivityBinding!!.titlebar.setDisplayRight(TitleBarView.DISPLAY_AIR)
-    }
-
-    override fun initView() {
-        dataBinding = mDataBinding as ActivityMainBinding?
-        tabAdapter = TabAdapter(supportFragmentManager, fragments, titles)
-
-        mActivityBinding!!.titlebar.SetTitleBarClickListener(TitleBarView.OnTitleBarClickListener { view, direction ->
+    override fun initTitle(titile: TitleBarView) {
+        titile.SetTitleBarClickListener(TitleBarView.OnTitleBarClickListener { view, direction ->
 
             if(direction == TitleBarView.LEFTBUTTON){
                 Toast.makeText(this,"点击了左边的按钮",Toast.LENGTH_LONG).show()
@@ -41,6 +33,12 @@ class MainActivity : BaseActivity() {
                 Toast.makeText(this,"点击了右边的按钮",Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    override fun initView() {
+        tabAdapter = TabAdapter(supportFragmentManager, fragments, titles)
+
+
     }
 
     override fun initData() {
@@ -54,8 +52,8 @@ class MainActivity : BaseActivity() {
                             fragments!!.add(TestFragment.newInstance(it.id))
                         }
                 )
-                dataBinding!!.viewPager.adapter = tabAdapter
-                dataBinding!!.tabLayout.setupWithViewPager(dataBinding!!.viewPager);
+                mDataBinding!!.viewPager.adapter = tabAdapter
+                mDataBinding!!.tabLayout.setupWithViewPager(mDataBinding!!.viewPager);
             }
         }))
     }

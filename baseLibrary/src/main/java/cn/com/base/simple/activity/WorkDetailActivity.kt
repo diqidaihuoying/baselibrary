@@ -12,26 +12,25 @@ import cn.com.base.http.ResponseCallback
 import cn.com.base.simple.bean.WorkDetail
 import cn.com.base.simple.databinding.ImageComponent
 import cn.com.base.simple.http.RetrofitHelp
+import cn.com.base.views.TitleBarView
 import java.util.*
 
-class WorkDetailActivity : BaseActivity(), View.OnClickListener {
+class WorkDetailActivity : BaseActivity<ActivityWorkDetailBinding>(), View.OnClickListener {
 
     companion object {
         var WORKID: String? = "work_id"
     }
 
     var workId = -1 //作品id
-    var detailBinding: ActivityWorkDetailBinding? = null
     var mWorkDetail: WorkDetail? = null
     override val layoutId: Int
         get() = R.layout.activity_work_detail
 
     override fun initView() {
         workId = intent.getIntExtra(WORKID, workId)
-        detailBinding = mDataBinding as ActivityWorkDetailBinding
 
-        detailBinding!!.tvFlower.setOnClickListener(this)
-        detailBinding!!.tvCollection.setOnClickListener(this)
+        mDataBinding!!.tvFlower.setOnClickListener(this)
+        mDataBinding!!.tvCollection.setOnClickListener(this)
     }
 
     override fun initData() {
@@ -40,19 +39,19 @@ class WorkDetailActivity : BaseActivity(), View.OnClickListener {
         applySchedulers(RetrofitHelp.apiService!!.getWorkDetail(hashMap as Map<String, Any>?)).subscribe(newObserver(object : ResponseCallback<WorkDetail>() {
             override fun onNext(workDetail: WorkDetail) {
                 mWorkDetail = workDetail;
-                detailBinding!!.workDetail = mWorkDetail
+                mDataBinding!!.workDetail = mWorkDetail
             }
         }))
     }
 
-    override fun initTitle() {
-        mActivityBinding!!.titlebar.setTitlename("作品详情")
+    override fun initTitle(titile: TitleBarView) {
+       titile.setTitlename("详情")
     }
 
     override fun onClick(v: View?) {
         when (v) {
         //鲜花
-            detailBinding!!.tvFlower -> {
+            mDataBinding!!.tvFlower -> {
                 if (mWorkDetail!!.mIsFavor == 0) {
                     mWorkDetail!!.mIsFavor=1
                 } else {
@@ -60,7 +59,7 @@ class WorkDetailActivity : BaseActivity(), View.OnClickListener {
                 }
             }
         //收藏
-            detailBinding!!.tvCollection -> {
+            mDataBinding!!.tvCollection -> {
                 if (mWorkDetail!!.mIsFollow == 0) {
                     mWorkDetail!!.mIsFollow=1
                 } else {
@@ -75,7 +74,7 @@ class WorkDetailActivity : BaseActivity(), View.OnClickListener {
     /**
      * 图片加载
      */
-    override fun getDatabinding(from: LayoutInflater, layoutId: Int, viewGroup: ViewGroup, b: Boolean): ViewDataBinding? {
+    override fun getDatabinding(from: LayoutInflater, layoutId: Int, viewGroup: ViewGroup, b: Boolean): ActivityWorkDetailBinding? {
         return DataBindingUtil.inflate(from, layoutId, viewGroup, b, ImageComponent())
     }
 

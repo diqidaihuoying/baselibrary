@@ -5,7 +5,7 @@ package cn.com.base.simple.databinding
  * 描述: 图片加载基类
  * 作者:wantao
  */
-open class ImageComponent :BaseImageModel(),Component
+ open class ImageComponent :BaseImageModel(),Component
 {
     override fun getBaseImageModel(): BaseImageModel? {
         return this

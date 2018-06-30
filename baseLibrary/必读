@@ -11,3 +11,7 @@ library
 9. 友盟统计
 10.加载中，空数据，无网络等多视图控件
 11. 屏幕适配
+
+
+注意事项：
+1.simple 中 databinding 使用了 两种更新视图的方式，一种是使用组件component(参考 workinfocomponent),一种是使用bean(参考workdetail)

@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * A simple [Fragment] subclass.
  */
-abstract class BaseFragment : Fragment() {
+public abstract class BaseFragment : Fragment() {
 
     protected var mDataBinding: ViewDataBinding? = null
     protected var mFragmentDataBinding :FragmentBaseBinding?= null
