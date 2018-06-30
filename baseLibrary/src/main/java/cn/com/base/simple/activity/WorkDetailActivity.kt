@@ -53,15 +53,19 @@ class WorkDetailActivity : BaseActivity(), View.OnClickListener {
         when (v) {
         //鲜花
             detailBinding!!.tvFlower -> {
-                if (mWorkDetail!!.isFavor == 0) {
-                    mWorkDetail!!.setIsFavorBg(1)
+                if (mWorkDetail!!.mIsFavor == 0) {
+                    mWorkDetail!!.mIsFavor=1
                 } else {
-                    mWorkDetail!!.setIsFavorBg(0)
+                    mWorkDetail!!.mIsFavor=0
                 }
             }
         //收藏
             detailBinding!!.tvCollection -> {
-
+                if (mWorkDetail!!.mIsFollow == 0) {
+                    mWorkDetail!!.mIsFollow=1
+                } else {
+                    mWorkDetail!!.mIsFollow=0
+                }
             }
 
         }
