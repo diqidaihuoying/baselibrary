@@ -39,7 +39,7 @@ import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
 
-abstract class BaseActivity<B : ViewDataBinding, P : MvpPresenter> : AppCompatActivity(), MvpView {
+abstract class BaseActivity<B : ViewDataBinding, P : MvpPresenter> : AppCompatActivity() {
     /**
      * 使用CompositeSubscription来持有所有的Subscriptions
      */

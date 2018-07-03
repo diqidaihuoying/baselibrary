@@ -18,6 +18,7 @@ import cn.com.base.views.TitleBarView
 
 
 class MainActivity : BaseActivity <ActivityMainBinding,MvpPresenter>() {
+
     override fun createPresent(): MvpPresenter {
         return BasePresent()
     }
