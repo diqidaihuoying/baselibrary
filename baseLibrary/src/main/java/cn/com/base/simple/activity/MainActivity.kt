@@ -6,17 +6,21 @@ import cn.com.base.base.BaseActivity
 import cn.com.base.base.BaseFragment
 import cn.com.base.base.TabAdapter
 import cn.com.base.databinding.ActivityMainBinding
-import cn.com.base.databinding.FragmentTestBinding
 import cn.com.base.http.ResponseCallback
+import cn.com.base.mvp.BasePresent
+import cn.com.base.mvp.MvpPresenter
+import cn.com.base.mvp.MvpView
 import cn.com.base.simple.bean.Interest
 import cn.com.base.simple.bean.TestBean
-import cn.com.base.simple.databinding.ImageComponent
 import cn.com.base.simple.fragment.TestFragment
 import cn.com.base.simple.http.RetrofitHelp
 import cn.com.base.views.TitleBarView
 
 
-class MainActivity : BaseActivity <ActivityMainBinding>() {
+class MainActivity : BaseActivity <ActivityMainBinding,MvpPresenter>() {
+    override fun createPresent(): MvpPresenter {
+        return BasePresent()
+    }
 
     override val layoutId = R.layout.activity_main
 

@@ -8,7 +8,6 @@ import android.content.IntentFilter
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -17,13 +16,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.TextView
 import android.widget.Toast
 import cn.com.base.R
 import cn.com.base.databinding.ActivityBaseBinding
 import cn.com.base.http.HttpResult
 import cn.com.base.http.ResponseCallback
-import cn.com.base.simple.databinding.Component
+import cn.com.base.mvp.MvpPresenter
+import cn.com.base.mvp.MvpView
 import cn.com.base.util.CurActivityManager
 import cn.com.base.util.NetWorkUtil
 import cn.com.base.util.SystemBarTintManager
@@ -40,7 +39,7 @@ import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
 
-abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding, P : MvpPresenter> : AppCompatActivity(), MvpView {
     /**
      * 使用CompositeSubscription来持有所有的Subscriptions
      */
@@ -57,13 +56,15 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     /**
      * basebinding
      */
-    private var mActivityBinding: ActivityBaseBinding ? = null
+    private var mActivityBinding: ActivityBaseBinding? = null
 
     /**
      * 内容binding
      */
-    protected var mDataBinding :B ?=null
-    
+    protected var mDataBinding: B? = null
+
+    protected var baseMvpPresenter: P? = null
+
     /**
      * 网络监听
      */
@@ -77,21 +78,25 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
         //设置沉浸式状态栏
         setRootView()
         //添加内容布局
-        mDataBinding=getDatabinding(LayoutInflater.from(this),layoutId,mActivityBinding!!.root as ViewGroup,false);
+        mDataBinding = getDatabinding(LayoutInflater.from(this), layoutId, mActivityBinding!!.root as ViewGroup, false);
         mActivityBinding!!.container!!.addView(mDataBinding!!.root)
+        baseMvpPresenter = createPresent()
+        /*this as nothing 是抛异常处理*/
         //注册网络监听
         registerNetWorkReceiver()
         initTitle(mActivityBinding!!.titlebar);
         initView()
         initData()
-     
+
     }
+
+    abstract fun createPresent(): P
 
     /**
      * 可重写，添加component
      */
     open protected fun getDatabinding(from: LayoutInflater, layoutId: Int, viewGroup: ViewGroup, b: Boolean): B? {
-        return DataBindingUtil.inflate(from,layoutId,viewGroup,b)
+        return DataBindingUtil.inflate(from, layoutId, viewGroup, b)
     }
 
 
@@ -106,8 +111,7 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
     /**
      * 取消网络监听
      */
-    private fun unregisterNetWorkReceiver()
-    {
+    private fun unregisterNetWorkReceiver() {
         unregisterReceiver(netWorkReceiver)
     }
 
@@ -187,6 +191,9 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
 
     override fun onResume() {
         super.onResume()
@@ -210,6 +217,10 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
         MobclickAgent.onPageEnd(javaClass.name);
     }
 
+    override fun onStop() {
+        super.onStop()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         unregisterNetWorkReceiver()
@@ -219,6 +230,7 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
             mCompositeDisposable!!.dispose()
         }
     }
+
 
     protected fun <T> newObserver(callback: ResponseCallback<T>): Observer<T> {
         return object : Observer<T> {
@@ -260,16 +272,13 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
 
     protected abstract fun initData()
 
-    protected abstract fun initTitle(titile:TitleBarView)
+    protected abstract fun initTitle(titile: TitleBarView)
 
-    inner class NetWorkReceiver : BroadcastReceiver()
-    {
+    inner class NetWorkReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            if (!NetWorkUtil.isNetworkAvailable(context!!))
-            {
+            if (!NetWorkUtil.isNetworkAvailable(context!!)) {
                 mActivityBinding!!.multiLayout.showNoNetwork()
-            }else
-            {
+            } else {
                 mActivityBinding!!.multiLayout.showContent()
             }
         }

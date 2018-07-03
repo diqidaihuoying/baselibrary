@@ -15,3 +15,5 @@ library
 
 注意事项：
 1.simple 中 databinding 使用了 两种更新视图的方式，一种是使用组件component(参考 workinfocomponent),一种是使用bean(参考workdetail)
+
+存在的问题，无法使用library中databinding生成的文件

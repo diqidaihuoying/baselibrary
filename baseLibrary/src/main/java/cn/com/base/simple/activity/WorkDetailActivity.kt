@@ -1,7 +1,6 @@
 package cn.com.base.simple.activity
 
 import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +8,16 @@ import cn.com.base.R
 import cn.com.base.base.BaseActivity
 import cn.com.base.databinding.ActivityWorkDetailBinding
 import cn.com.base.http.ResponseCallback
+import cn.com.base.mvp.BasePresent
+import cn.com.base.mvp.MvpPresenter
+import cn.com.base.mvp.MvpView
 import cn.com.base.simple.bean.WorkDetail
 import cn.com.base.simple.databinding.ImageComponent
 import cn.com.base.simple.http.RetrofitHelp
 import cn.com.base.views.TitleBarView
 import java.util.*
 
-class WorkDetailActivity : BaseActivity<ActivityWorkDetailBinding>(), View.OnClickListener {
+class WorkDetailActivity : BaseActivity<ActivityWorkDetailBinding,MvpPresenter>(), View.OnClickListener {
 
     companion object {
         var WORKID: String? = "work_id"
@@ -25,6 +27,10 @@ class WorkDetailActivity : BaseActivity<ActivityWorkDetailBinding>(), View.OnCli
     var mWorkDetail: WorkDetail? = null
     override val layoutId: Int
         get() = R.layout.activity_work_detail
+
+    override fun createPresent(): MvpPresenter {
+        return BasePresent()
+    }
 
     override fun initView() {
         workId = intent.getIntExtra(WORKID, workId)

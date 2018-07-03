@@ -22,7 +22,8 @@
             android:name=".base.BaseActivity"
             android:label="@string/title_activity_base"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".simple.activity.WorkDetailActivity"></activity>
+        <activity android:name=".simple.activity.WorkDetailActivity" />
+        <activity android:name=".base.DDDActivity"></activity>
     </application>
 
 </manifest>
