@@ -42,6 +42,8 @@ data class WorkDetail(
         var uid: Int,
         var width: Int
 ) : BaseObservable() {
+
+
     var favorBg: Drawable
         @Bindable
         get() {

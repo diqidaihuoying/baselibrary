@@ -10,13 +10,12 @@ import cn.com.base.mvp.MvpView
  */
  class ABContact {
 
-     interface IABPresent : MvpPresenter
+     interface IABPresent
      {
          fun requestTestContent();
      }
 
-     interface IABView :MvpView
-     {
+     interface IABView :MvpView{
          fun setTestContent();
      }
 

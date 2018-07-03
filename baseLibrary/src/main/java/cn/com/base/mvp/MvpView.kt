@@ -6,4 +6,11 @@ package cn.com.base.mvp
  * 作者:wantao
  */
 interface MvpView
+{
+    /*显示无网络视图*/
+    fun showNoNetwork()
+
+    /*显示内容视图*/
+    fun showContent()
+}
 

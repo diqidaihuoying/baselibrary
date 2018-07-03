@@ -30,7 +30,7 @@ class ABActivity : BaseActivity<ActivityAbBinding, ABPresent>(),ABContact.IABVie
     }
 
     override fun initData() {
-        baseMvpPresenter!!.requestTestContent()
+        basePresent!!.requestTestContent()
     }
 
     override fun initTitle(titile: TitleBarView) {

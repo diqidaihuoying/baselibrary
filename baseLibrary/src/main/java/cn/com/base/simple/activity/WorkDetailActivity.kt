@@ -7,47 +7,39 @@ import android.view.ViewGroup
 import cn.com.base.R
 import cn.com.base.base.BaseActivity
 import cn.com.base.databinding.ActivityWorkDetailBinding
-import cn.com.base.http.ResponseCallback
-import cn.com.base.mvp.BasePresent
-import cn.com.base.mvp.MvpPresenter
-import cn.com.base.mvp.MvpView
 import cn.com.base.simple.bean.WorkDetail
 import cn.com.base.simple.databinding.ImageComponent
-import cn.com.base.simple.http.RetrofitHelp
+import cn.com.base.simple.mvp.WorkDetailContact
+import cn.com.base.simple.mvp.WrokDetailPresenter
 import cn.com.base.views.TitleBarView
-import java.util.*
 
-class WorkDetailActivity : BaseActivity<ActivityWorkDetailBinding,MvpPresenter>(), View.OnClickListener {
+class WorkDetailActivity : BaseActivity<ActivityWorkDetailBinding, WrokDetailPresenter>(), View.OnClickListener,WorkDetailContact.IWorkDetailMvpView {
 
     companion object {
         var WORKID: String? = "work_id"
     }
 
     var workId = -1 //作品id
-    var mWorkDetail: WorkDetail? = null
+
     override val layoutId: Int
         get() = R.layout.activity_work_detail
 
-    override fun createPresent(): MvpPresenter {
-        return BasePresent()
+    override fun createPresent(): WrokDetailPresenter {
+        return WrokDetailPresenter(this)
     }
 
     override fun initView() {
         workId = intent.getIntExtra(WORKID, workId)
-
         mDataBinding!!.tvFlower.setOnClickListener(this)
         mDataBinding!!.tvCollection.setOnClickListener(this)
     }
 
     override fun initData() {
-        var hashMap = RetrofitHelp.getBaseMap() as HashMap
-        hashMap.put("tid", workId.toString())
-        applySchedulers(RetrofitHelp.apiService!!.getWorkDetail(hashMap as Map<String, Any>?)).subscribe(newObserver(object : ResponseCallback<WorkDetail>() {
-            override fun onNext(workDetail: WorkDetail) {
-                mWorkDetail = workDetail;
-                mDataBinding!!.workDetail = mWorkDetail
-            }
-        }))
+       basePresent!!.getWorkDetailData(workId)
+    }
+
+    override fun showWorkDetailView(workDetail: WorkDetail) {
+        mDataBinding!!.workDetail = workDetail
     }
 
     override fun initTitle(titile: TitleBarView) {
@@ -58,23 +50,13 @@ class WorkDetailActivity : BaseActivity<ActivityWorkDetailBinding,MvpPresenter>(
         when (v) {
         //鲜花
             mDataBinding!!.tvFlower -> {
-                if (mWorkDetail!!.mIsFavor == 0) {
-                    mWorkDetail!!.mIsFavor=1
-                } else {
-                    mWorkDetail!!.mIsFavor=0
-                }
+              basePresent!!.onFlower()
             }
         //收藏
             mDataBinding!!.tvCollection -> {
-                if (mWorkDetail!!.mIsFollow == 0) {
-                    mWorkDetail!!.mIsFollow=1
-                } else {
-                    mWorkDetail!!.mIsFollow=0
-                }
+             basePresent!!.onCollcet()
             }
-
         }
-
     }
 
     /**

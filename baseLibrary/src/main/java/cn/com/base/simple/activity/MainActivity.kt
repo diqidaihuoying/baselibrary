@@ -6,21 +6,17 @@ import cn.com.base.base.BaseActivity
 import cn.com.base.base.BaseFragment
 import cn.com.base.base.TabAdapter
 import cn.com.base.databinding.ActivityMainBinding
-import cn.com.base.http.ResponseCallback
-import cn.com.base.mvp.BasePresent
-import cn.com.base.mvp.MvpPresenter
-import cn.com.base.mvp.MvpView
 import cn.com.base.simple.bean.Interest
-import cn.com.base.simple.bean.TestBean
 import cn.com.base.simple.fragment.TestFragment
-import cn.com.base.simple.http.RetrofitHelp
+import cn.com.base.simple.mvp.MainContact
+import cn.com.base.simple.mvp.MainPresenter
 import cn.com.base.views.TitleBarView
 
 
-class MainActivity : BaseActivity <ActivityMainBinding,MvpPresenter>() {
+class MainActivity : BaseActivity <ActivityMainBinding,MainPresenter>(),MainContact.IMainMvpView {
 
-    override fun createPresent(): MvpPresenter {
-        return BasePresent()
+    override fun createPresent(): MainPresenter {
+        return MainPresenter(this)
     }
 
     override val layoutId = R.layout.activity_main
@@ -29,7 +25,6 @@ class MainActivity : BaseActivity <ActivityMainBinding,MvpPresenter>() {
     protected var titles: MutableList<String>? = mutableListOf()
     protected var fragments: MutableList<BaseFragment<ViewDataBinding>>? = mutableListOf()
 
-    protected var testBean: TestBean? = null
 
     override fun initTitle(titile: TitleBarView) {
         titile.SetTitleBarClickListener(TitleBarView.OnTitleBarClickListener { view, direction ->
@@ -44,25 +39,23 @@ class MainActivity : BaseActivity <ActivityMainBinding,MvpPresenter>() {
 
     override fun initView() {
         tabAdapter = TabAdapter(supportFragmentManager, fragments, titles)
-
-
     }
 
     override fun initData() {
-        applySchedulers(RetrofitHelp.apiService!!.getInterests(RetrofitHelp.getBaseMap())).subscribe(newObserver(object : ResponseCallback<List<Interest>>() {
-            override fun onNext(result: List<Interest>) {
-                titles!!.clear()
-                fragments!!.clear()
-                result.forEach(
-                        {
-                            titles!!.add(it.name)
-                            fragments!!.add(TestFragment.newInstance(it.id) as BaseFragment<ViewDataBinding>)
-                        }
-                )
-                mDataBinding!!.viewPager.adapter = tabAdapter
-                mDataBinding!!.tabLayout.setupWithViewPager(mDataBinding!!.viewPager);
-            }
-        }))
+        basePresent!!.getVpData()
+
+    }
+    override fun showVpData(result: List<Interest>) {
+        titles!!.clear()
+        fragments!!.clear()
+        result.forEach(
+                {
+                    titles!!.add(it.name)
+                    fragments!!.add(TestFragment.newInstance(it.id) as BaseFragment<ViewDataBinding>)
+                }
+        )
+        mDataBinding!!.viewPager.adapter = tabAdapter
+        mDataBinding!!.tabLayout.setupWithViewPager(mDataBinding!!.viewPager);
     }
 
 
