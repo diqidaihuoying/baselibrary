@@ -80,6 +80,11 @@ abstract class BaseActivity<B : ViewDataBinding, P : BaseActivityPresent> : AppC
         basePresent!!.onPause()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        basePresent!!.onDestroy()
+    }
+
     override fun showNoNetwork() {
         mActivityBinding!!.multiLayout.showNoNetwork()
     }
