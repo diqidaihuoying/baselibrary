@@ -30,7 +30,9 @@ class GsonResponseBodyConverter<T>(private val gson: Gson, private val type: Typ
 
         } else {
             LogUtil.e("GsonResponseBodyConverter", "rt异常:" + httpHttpResult.rt)
+            HttpErrorFactory.factory.errorResonse?.onRtError(httpHttpResult.rt)
             return httpHttpResult as T
         }
     }
+
 }

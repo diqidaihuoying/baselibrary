@@ -29,7 +29,8 @@ import org.greenrobot.eventbus.EventBus
  * 描述:
  * 作者:wantao
  */
-class TestFragment : BaseFragment<FragmentTestBinding,TestPresenter>(), OnRefreshListener, OnLoadMoreListener ,BaseRecyclerAdapter.OnRcyClickListener,TestContact.ITestMvpView{
+class TestFragment : BaseFragment<FragmentTestBinding, TestPresenter>(), OnRefreshListener, OnLoadMoreListener, BaseRecyclerAdapter.OnRcyClickListener, TestContact.ITestMvpView {
+
 
     val TAG: String = "TestFragment"
     override val layoutId: Int
@@ -39,17 +40,17 @@ class TestFragment : BaseFragment<FragmentTestBinding,TestPresenter>(), OnRefres
     var adapter: TestRecAdapter? = null
 
     companion object {
-         fun newInstance(id: Int): TestFragment {
-            var testFragment=TestFragment();
-            var bundle=Bundle();
-            bundle.putInt("id",id)
-            testFragment.arguments=bundle
+        fun newInstance(id: Int): TestFragment {
+            var testFragment = TestFragment();
+            var bundle = Bundle();
+            bundle.putInt("id", id)
+            testFragment.arguments = bundle
             return testFragment
         }
     }
 
     override fun createPresenter(): TestPresenter? {
-        return TestPresenter(this,arguments!!.getInt("id"),list)
+        return TestPresenter(this, arguments!!.getInt("id"), list)
     }
 
     override fun initView() {
@@ -73,12 +74,13 @@ class TestFragment : BaseFragment<FragmentTestBinding,TestPresenter>(), OnRefres
     override fun showVp() {
         adapter!!.notifyDataSetChanged()
     }
+
     /**
      * recyclerview瀑布流配置
      */
     fun initRecyclerView() {
         //设置margin
-        val marginLayoutParams =mDataBinding!!.recyclerView.layoutParams as ViewGroup.MarginLayoutParams
+        val marginLayoutParams = mDataBinding!!.recyclerView.layoutParams as ViewGroup.MarginLayoutParams
         marginLayoutParams.topMargin = this.resources.getDimensionPixelSize(R.dimen.dp_10)
         marginLayoutParams.leftMargin = this.resources.getDimensionPixelSize(R.dimen.dp_10)
         mDataBinding!!.recyclerView.setLayoutParams(marginLayoutParams)
@@ -101,7 +103,7 @@ class TestFragment : BaseFragment<FragmentTestBinding,TestPresenter>(), OnRefres
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
-       basePresenter!!.refresh()
+        basePresenter!!.refresh()
         mDataBinding!!.refreshLayout.finishRefresh(1000, true)//传入false表示刷新失败
     }
 
@@ -111,8 +113,8 @@ class TestFragment : BaseFragment<FragmentTestBinding,TestPresenter>(), OnRefres
     }
 
     override fun onRcyClick(parent: ViewGroup, viewType: Int) {
-        var intent= Intent(context,WorkDetailActivity::class.java)
-        intent.putExtra(WorkDetailActivity.WORKID,list[viewType].id)
+        var intent = Intent(context, WorkDetailActivity::class.java)
+        intent.putExtra(WorkDetailActivity.WORKID, list[viewType].id)
         startActivity(intent)
     }
 

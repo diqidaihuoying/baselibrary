@@ -88,6 +88,11 @@ abstract class BaseActivity<B : ViewDataBinding, P : BaseActivityPresent> : AppC
         mActivityBinding!!.multiLayout.showContent()
     }
 
+    override fun showEmpty() {
+        mActivityBinding!!.multiLayout.showEmpty()
+    }
+
+
     protected abstract fun initView()
 
     protected abstract fun initData()

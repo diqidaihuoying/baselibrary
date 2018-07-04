@@ -44,6 +44,10 @@ public abstract class BaseFragment<B : ViewDataBinding,P : BaseFragmentPresent> 
         mFragmentDataBinding!!.multiLayout.showContent()
     }
 
+    override fun showEmpty() {
+        mFragmentDataBinding!!.multiLayout.showEmpty()
+    }
+
     /**
      * 可重写
      */

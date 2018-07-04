@@ -24,11 +24,6 @@ class ResponseConverterFactory private constructor(private val gson: Gson?) : Co
         return GsonResponseBodyConverter<Any>(gson!!, type!!)
     }
 
-    override fun requestBodyConverter(type: Type?, parameterAnnotations: Array<Annotation>?, methodAnnotations: Array<Annotation>?, retrofit: Retrofit?): Converter<*, RequestBody>? {
-        //返回我们自定义的Gson响应体变换器
-        return GsonResponseBodyConverter(gson!!, type!!)
-    }
-
     companion object {
         @JvmOverloads
         fun create(gson: Gson = Gson()): ResponseConverterFactory {

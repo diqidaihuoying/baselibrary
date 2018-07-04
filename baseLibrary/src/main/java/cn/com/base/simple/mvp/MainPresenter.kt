@@ -17,6 +17,8 @@ class MainPresenter(var view:MainContact.IMainMvpView) : BaseActivityPresent(vie
             override fun onNext(result: List<Interest>) {
                view.showVpData(result)
             }
+
+
         }))
     }
 }

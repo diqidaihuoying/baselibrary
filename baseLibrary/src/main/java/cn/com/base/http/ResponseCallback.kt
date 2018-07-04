@@ -7,11 +7,11 @@ package cn.com.base.http
  */
 abstract  class  ResponseCallback<T> {
 
-    fun onComplete() {
+    open fun onComplete() {
 
     }
 
-    fun onError(e: Throwable) {
+    open fun onError(e: Throwable) {
 
     }
 

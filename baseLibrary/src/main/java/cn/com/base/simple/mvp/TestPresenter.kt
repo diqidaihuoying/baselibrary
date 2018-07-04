@@ -35,7 +35,11 @@ class TestPresenter(var view: TestContact.ITestMvpView) : BaseFragmentPresent(vi
                     list!!.clear()
                 }
                 list!!.addAll(t)
-                view.showVp()
+                if (list!!.size==0)
+                {
+                }else
+                {
+                }
             }
         }))
     }

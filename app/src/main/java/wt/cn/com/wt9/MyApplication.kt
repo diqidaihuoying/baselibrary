@@ -1,6 +1,7 @@
 package wt.cn.com.wt9
 
 import cn.com.base.LibApplication
+import cn.com.base.http.HttpErrorFactory
 
 
 /**
@@ -9,3 +10,16 @@ import cn.com.base.LibApplication
  * 作者:wantao
  */
 class MyApplication : LibApplication()
+{
+    override fun onCreate() {
+        super.onCreate()
+        HttpErrorFactory.factory.errorResonse=object :HttpErrorFactory.IErrorResonse
+        {
+            override fun onRtError(rt: Int) {
+
+            }
+        }
+
+    }
+}
+
