@@ -7,7 +7,10 @@ import cn.com.base.http.HttpErrorFactory
  * 描述:
  * 作者:wantao
  */
+
+
 class HttpError :HttpErrorFactory.IErrorResonse {
     override fun onRtError(rt: Int) {
+
     }
 }

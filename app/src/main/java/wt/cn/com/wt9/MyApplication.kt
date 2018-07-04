@@ -15,7 +15,6 @@ class MyApplication : LibApplication()
     override fun onCreate() {
         super.onCreate()
         HttpErrorFactory.factory.errorResonse=HttpError()
-
     }
 }
 
