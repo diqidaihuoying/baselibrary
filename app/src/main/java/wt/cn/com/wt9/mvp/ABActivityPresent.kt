@@ -1,6 +1,6 @@
 package wt.cn.com.wt9.mvp
 
-import cn.com.base.mvp.BasePresent
+import cn.com.base.mvp.BaseActivityPresent
 
 
 /**
@@ -8,7 +8,7 @@ import cn.com.base.mvp.BasePresent
  * 描述:
  * 作者:wantao
  */
-class ABPresent(val mvpView :ABContact.IABView) :BasePresent(mvpView), ABContact.IABPresent {
+class ABActivityPresent(val mvpView :ABContact.IABView) :BaseActivityPresent(mvpView), ABContact.IABPresent {
 
     override fun requestTestContent() {
         //先进行非空判断

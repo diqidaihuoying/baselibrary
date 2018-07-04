@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter
  * 描述:
  * 作者:wantao
  */
-class TabAdapter(fm: FragmentManager, internal var fragments: MutableList<BaseFragment<ViewDataBinding>>?, internal var titles: MutableList<String>?) : FragmentPagerAdapter(fm) {
+class TabAdapter(fm: FragmentManager, internal var fragments: MutableList<Fragment>?, internal var titles: MutableList<String>?) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment? {
         return  fragments!![position]

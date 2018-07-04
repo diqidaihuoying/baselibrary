@@ -35,7 +35,7 @@ import pub.devrel.easypermissions.PermissionRequest
  * 描述:
  * 作者:wantao
  */
-open class BasePresent(val baseMvpView: MvpView) : MvpPresenter {
+open class BaseActivityPresent(var baseMvpView: MvpView) : BaseHttpPresent(baseMvpView),MvpPresenter {
 
     var activity=baseMvpView as Activity
     var netWorkReceiver = NetWorkReceiver()
@@ -44,10 +44,7 @@ open class BasePresent(val baseMvpView: MvpView) : MvpPresenter {
      * 默认权限添加
      */
     private val defaultPerms = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    /**
-     * 使用CompositeSubscription来持有所有的Subscriptions
-     */
-    protected var mCompositeDisposable: CompositeDisposable? = CompositeDisposable()
+
 
 
 
@@ -82,8 +79,7 @@ open class BasePresent(val baseMvpView: MvpView) : MvpPresenter {
     override fun onDestroy() {
         CurActivityManager.getActivityManager().popActivity(activity)
         unregisterNetWorkReceiver()
-        mCompositeDisposable!!.clear()
-        mCompositeDisposable!!.dispose()
+        onDestroyHttp()
     }
 
     override fun requiresDefaultPermission() {
@@ -176,41 +172,6 @@ open class BasePresent(val baseMvpView: MvpView) : MvpPresenter {
         }
     }
 
-    /**
-     * 对 Observable<HttpResult></HttpResult><T>> 做统一的处理，处理了线程调度、分割返回结果等操作组合了起来
-     *
-     * @param responseObservable
-     * @param <T>
-     * @return
-    </T></T> */
-    protected fun <T> applySchedulers(responseObservable: Observable<HttpResult<T>>): Observable<T> {
-        return responseObservable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map { tHttpResult -> tHttpResult.data }
-    }
-
-    protected fun <T> newObserver(callback: ResponseCallback<T>): Observer<T> {
-        return object : Observer<T> {
-            override fun onError(e: Throwable) {
-                callback.onError(e)
-            }
-
-            override fun onComplete() {
-                callback.onComplete()
-            }
-
-            override fun onSubscribe(d: Disposable) {
-                mCompositeDisposable!!.add(d)
-            }
-
-            override fun onNext(t: T) {
-                if (!mCompositeDisposable!!.isDisposed) {
-                    callback.onNext(t)
-                }
-            }
-        }
-    }
 
     inner class NetWorkReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {

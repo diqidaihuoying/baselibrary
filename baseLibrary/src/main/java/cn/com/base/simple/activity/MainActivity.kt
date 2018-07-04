@@ -1,11 +1,13 @@
 package cn.com.base.simple.activity
 import android.databinding.ViewDataBinding
+import android.support.v4.app.Fragment
 import android.widget.Toast
 import cn.com.base.R
 import cn.com.base.base.BaseActivity
 import cn.com.base.base.BaseFragment
 import cn.com.base.base.TabAdapter
 import cn.com.base.databinding.ActivityMainBinding
+import cn.com.base.mvp.BaseHttpPresent
 import cn.com.base.simple.bean.Interest
 import cn.com.base.simple.fragment.TestFragment
 import cn.com.base.simple.mvp.MainContact
@@ -23,7 +25,7 @@ class MainActivity : BaseActivity <ActivityMainBinding,MainPresenter>(),MainCont
 
     protected var tabAdapter: TabAdapter? = null
     protected var titles: MutableList<String>? = mutableListOf()
-    protected var fragments: MutableList<BaseFragment<ViewDataBinding>>? = mutableListOf()
+    protected var fragments: MutableList<Fragment>? = mutableListOf()
 
 
     override fun initTitle(titile: TitleBarView) {
@@ -51,7 +53,7 @@ class MainActivity : BaseActivity <ActivityMainBinding,MainPresenter>(),MainCont
         result.forEach(
                 {
                     titles!!.add(it.name)
-                    fragments!!.add(TestFragment.newInstance(it.id) as BaseFragment<ViewDataBinding>)
+                    fragments!!.add(TestFragment.newInstance(it.id))
                 }
         )
         mDataBinding!!.viewPager.adapter = tabAdapter

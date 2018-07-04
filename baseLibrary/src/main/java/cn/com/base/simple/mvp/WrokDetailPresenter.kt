@@ -1,7 +1,7 @@
 package cn.com.base.simple.mvp
 
 import cn.com.base.http.ResponseCallback
-import cn.com.base.mvp.BasePresent
+import cn.com.base.mvp.BaseActivityPresent
 import cn.com.base.simple.bean.WorkDetail
 import cn.com.base.simple.http.RetrofitHelp
 import java.util.HashMap
@@ -11,7 +11,7 @@ import java.util.HashMap
  * 描述:
  * 作者:wantao
  */
-class WrokDetailPresenter(var  view:WorkDetailContact.IWorkDetailMvpView) : BasePresent(view),WorkDetailContact.IWorkDetailPresent {
+class WrokDetailPresenter(var  view:WorkDetailContact.IWorkDetailMvpView) : BaseActivityPresent(view),WorkDetailContact.IWorkDetailPresent {
     var mWorkDetail: WorkDetail?=null
 
 

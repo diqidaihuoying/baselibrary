@@ -1,7 +1,6 @@
 package cn.com.base.simple.fragment
 
 import android.content.Intent
-import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -14,16 +13,15 @@ import cn.com.base.base.BaseRecyclerAdapter
 import cn.com.base.databinding.FragmentTestBinding
 import cn.com.base.eventbus.Message
 import cn.com.base.eventbus.MessageEvent
-import cn.com.base.http.ResponseCallback
 import cn.com.base.simple.activity.WorkDetailActivity
 import cn.com.base.simple.bean.WorkInfo
-import cn.com.base.simple.http.RetrofitHelp
+import cn.com.base.simple.mvp.TestContact
+import cn.com.base.simple.mvp.TestPresenter
 import cn.com.base.simple.util.SpacesItemDecoration
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import org.greenrobot.eventbus.EventBus
-import java.util.*
 
 
 /**
@@ -31,9 +29,7 @@ import java.util.*
  * 描述:
  * 作者:wantao
  */
-class TestFragment : BaseFragment<FragmentTestBinding>(), OnRefreshListener, OnLoadMoreListener ,BaseRecyclerAdapter.OnRcyClickListener{
-
-
+class TestFragment : BaseFragment<FragmentTestBinding,TestPresenter>(), OnRefreshListener, OnLoadMoreListener ,BaseRecyclerAdapter.OnRcyClickListener,TestContact.ITestMvpView{
 
     val TAG: String = "TestFragment"
     override val layoutId: Int
@@ -41,8 +37,6 @@ class TestFragment : BaseFragment<FragmentTestBinding>(), OnRefreshListener, OnL
 
     var list: MutableList<WorkInfo> = mutableListOf()
     var adapter: TestRecAdapter? = null
-    var pageSize: Int? = 10
-    var currentPage: Int? = 0
 
     companion object {
          fun newInstance(id: Int): TestFragment {
@@ -52,6 +46,10 @@ class TestFragment : BaseFragment<FragmentTestBinding>(), OnRefreshListener, OnL
             testFragment.arguments=bundle
             return testFragment
         }
+    }
+
+    override fun createPresenter(): TestPresenter? {
+        return TestPresenter(this,arguments!!.getInt("id"),list)
     }
 
     override fun initView() {
@@ -69,22 +67,12 @@ class TestFragment : BaseFragment<FragmentTestBinding>(), OnRefreshListener, OnL
     }
 
     override fun initData() {
-        var baseMap = RetrofitHelp.getBaseMap() as HashMap
-        baseMap.put("pi", currentPage.toString())
-        baseMap.put("ps", pageSize.toString())
-        baseMap.put("hid", arguments!!.getInt("id").toString())
-        applySchedulers(RetrofitHelp.apiService!!.getWorkList(baseMap as Map<String, Any>?)).subscribe(newObserver(object : ResponseCallback<List<WorkInfo>>() {
-            override fun onNext(t: List<WorkInfo>) {
-                if (currentPage == 1) {
-                    list.clear()
-                }
-                list.addAll(t)
-                adapter!!.notifyDataSetChanged()
-            }
-        }))
 
     }
 
+    override fun showVp() {
+        adapter!!.notifyDataSetChanged()
+    }
     /**
      * recyclerview瀑布流配置
      */
@@ -112,13 +100,13 @@ class TestFragment : BaseFragment<FragmentTestBinding>(), OnRefreshListener, OnL
         )
     }
 
-
     override fun onRefresh(refreshLayout: RefreshLayout) {
-        initData()
+       basePresenter!!.refresh()
         mDataBinding!!.refreshLayout.finishRefresh(1000, true)//传入false表示刷新失败
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
+        basePresenter!!.loadMore()
         mDataBinding!!.refreshLayout.finishLoadMore(1000)//传入false表示刷新失败
     }
 
@@ -126,6 +114,6 @@ class TestFragment : BaseFragment<FragmentTestBinding>(), OnRefreshListener, OnL
         var intent= Intent(context,WorkDetailActivity::class.java)
         intent.putExtra(WorkDetailActivity.WORKID,list[viewType].id)
         startActivity(intent)
-
     }
+
 }

@@ -1,7 +1,5 @@
 package cn.com.base.simple.mvp
 
-import cn.com.base.mvp.BasePresent
-import cn.com.base.mvp.MvpPresenter
 import cn.com.base.mvp.MvpView
 import cn.com.base.simple.bean.Interest
 

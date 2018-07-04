@@ -9,17 +9,17 @@ import wt.cn.com.wt9.R
 import wt.cn.com.wt9.databinding.ActivityAbBinding
 import wt.cn.com.wt9.databinding.ImageComponent
 import wt.cn.com.wt9.mvp.ABContact
-import wt.cn.com.wt9.mvp.ABPresent
+import wt.cn.com.wt9.mvp.ABActivityPresent
 
-class ABActivity : BaseActivity<ActivityAbBinding, ABPresent>(),ABContact.IABView {
+class ABActivity : BaseActivity<ActivityAbBinding, ABActivityPresent>(),ABContact.IABView {
 
     override fun setTestContent() {
         mDataBinding!!.tv.text="hello"
 
     }
 
-    override fun createPresent(): ABPresent {
-       return ABPresent(this)
+    override fun createPresent(): ABActivityPresent {
+       return ABActivityPresent(this)
     }
 
     override val layoutId: Int

@@ -1,7 +1,7 @@
 package cn.com.base.simple.mvp
 
 import cn.com.base.http.ResponseCallback
-import cn.com.base.mvp.BasePresent
+import cn.com.base.mvp.BaseActivityPresent
 import cn.com.base.simple.bean.Interest
 import cn.com.base.simple.http.RetrofitHelp
 
@@ -10,7 +10,7 @@ import cn.com.base.simple.http.RetrofitHelp
  * 描述:
  * 作者:wantao
  */
-class MainPresenter(var view:MainContact.IMainMvpView) : BasePresent(view) ,MainContact.IMainPresenter{
+class MainPresenter(var view:MainContact.IMainMvpView) : BaseActivityPresent(view) ,MainContact.IMainPresenter{
 
     override fun getVpData() {
         applySchedulers(RetrofitHelp.apiService!!.getInterests(RetrofitHelp.getBaseMap())).subscribe(newObserver(object : ResponseCallback<List<Interest>>() {
