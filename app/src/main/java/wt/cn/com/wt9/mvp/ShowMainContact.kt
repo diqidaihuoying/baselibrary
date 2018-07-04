@@ -1,5 +1,7 @@
 package wt.cn.com.wt9.mvp
 
+import cn.com.base.mvp.MvpView
+
 /**
  * 创建日期：2018/7/4 on 10:00
  * 描述:
@@ -7,12 +9,13 @@ package wt.cn.com.wt9.mvp
  */
 class ShowMainContact {
 
-    interface IShowMainContact
+    interface IShowMainPresenter
     {
-
+        fun switchFragment(position:Int)
     }
 
-    interface IShowMainMvpView
+    interface IShowMainMvpView :MvpView
     {
+        fun showPublishDialog()
     }
 }
