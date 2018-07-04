@@ -2,6 +2,7 @@ package wt.cn.com.wt9
 
 import cn.com.base.LibApplication
 import cn.com.base.http.HttpErrorFactory
+import wt.cn.com.wt9.http.HttpError
 
 
 /**
@@ -13,12 +14,7 @@ class MyApplication : LibApplication()
 {
     override fun onCreate() {
         super.onCreate()
-        HttpErrorFactory.factory.errorResonse=object :HttpErrorFactory.IErrorResonse
-        {
-            override fun onRtError(rt: Int) {
-
-            }
-        }
+        HttpErrorFactory.factory.errorResonse=HttpError()
 
     }
 }
