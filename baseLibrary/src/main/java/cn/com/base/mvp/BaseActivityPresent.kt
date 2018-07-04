@@ -1,7 +1,6 @@
 package cn.com.base.mvp
 
 import android.Manifest
-import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -9,23 +8,15 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Build
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import cn.com.base.R
-import cn.com.base.http.HttpResult
-import cn.com.base.http.ResponseCallback
 import cn.com.base.util.CurActivityManager
 import cn.com.base.util.NetWorkUtil
 import cn.com.base.util.SystemBarTintManager
 import cn.com.base.util.ToastUtils
 import com.umeng.analytics.MobclickAgent
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
@@ -37,7 +28,7 @@ import pub.devrel.easypermissions.PermissionRequest
  */
 open class BaseActivityPresent(var baseMvpView: MvpView) : BaseHttpPresent(baseMvpView),MvpPresenter {
 
-    var activity=baseMvpView as Activity
+    var activity=baseMvpView as AppCompatActivity
     var netWorkReceiver = NetWorkReceiver()
 
     /**

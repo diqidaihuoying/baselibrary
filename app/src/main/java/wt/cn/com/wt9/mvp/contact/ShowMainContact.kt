@@ -1,4 +1,4 @@
-package wt.cn.com.wt9.mvp
+package wt.cn.com.wt9.mvp.contact
 
 import cn.com.base.mvp.MvpView
 
@@ -11,6 +11,7 @@ class ShowMainContact {
 
     interface IShowMainPresenter
     {
+        fun initFragment()
         fun switchFragment(position:Int)
     }
 

@@ -68,6 +68,7 @@ class TestFragment : BaseFragment<FragmentTestBinding, TestPresenter>(), OnRefre
     }
 
     override fun initData() {
+        basePresenter!!.getData()
 
     }
 

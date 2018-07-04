@@ -8,10 +8,10 @@ import cn.com.base.views.TitleBarView
 import wt.cn.com.wt9.R
 import wt.cn.com.wt9.databinding.ActivityAbBinding
 import wt.cn.com.wt9.databinding.ImageComponent
-import wt.cn.com.wt9.mvp.ABContact
-import wt.cn.com.wt9.mvp.ABActivityPresent
+import wt.cn.com.wt9.mvp.contact.ABActivityContact
+import wt.cn.com.wt9.mvp.present.ABActivityPresent
 
-class ABActivity : BaseActivity<ActivityAbBinding, ABActivityPresent>(),ABContact.IABView {
+class ABActivity : BaseActivity<ActivityAbBinding, ABActivityPresent>(), ABActivityContact.IABView {
 
     override fun setTestContent() {
         mDataBinding!!.tv.text="hello"

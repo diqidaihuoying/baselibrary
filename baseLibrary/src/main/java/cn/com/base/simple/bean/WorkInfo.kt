@@ -1,8 +1,5 @@
 package cn.com.base.simple.bean
 
-import cn.com.base.R
-import cn.com.base.util.DateUtil
-
 
 /**
  * @author : TJ

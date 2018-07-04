@@ -16,12 +16,12 @@ class TestPresenter(var view: TestContact.ITestMvpView) : BaseFragmentPresent(vi
     var pageSize: Int? = 10
     var currentPage: Int? = 0
 
-    var hid:Int?=0
-    var list: MutableList<WorkInfo>?=null
+    var hid: Int? = 0
+    var list: MutableList<WorkInfo>? = null
 
-    constructor(view: TestContact.ITestMvpView,hid:Int,list: MutableList<WorkInfo>) : this(view) {
-        this.hid=hid
-        this.list=list
+    constructor(view: TestContact.ITestMvpView, hid: Int, list: MutableList<WorkInfo>) : this(view) {
+        this.hid = hid
+        this.list = list
     }
 
     override fun getData() {
@@ -35,22 +35,22 @@ class TestPresenter(var view: TestContact.ITestMvpView) : BaseFragmentPresent(vi
                     list!!.clear()
                 }
                 list!!.addAll(t)
-                if (list!!.size==0)
-                {
-                }else
-                {
+                if (list!!.size != 0) {
+                    view.showVp()
+                } else {
+                    view.showEmpty()
                 }
             }
         }))
     }
 
     override fun refresh() {
-        currentPage=1
+        currentPage = 1
         getData()
     }
 
     override fun loadMore() {
-        currentPage=currentPage!!+1
+        currentPage = currentPage!! + 1
         getData()
     }
 }
