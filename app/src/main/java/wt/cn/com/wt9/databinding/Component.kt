@@ -1,7 +1,6 @@
 package wt.cn.com.wt9.databinding
 
 import android.databinding.DataBindingComponent
-import cn.com.base.simple.databinding.WorkInfoComponent
 
 
 /**
@@ -11,16 +10,13 @@ import cn.com.base.simple.databinding.WorkInfoComponent
  */
 interface Component:DataBindingComponent
 {
-    override fun getBaseImageModel1(): cn.com.base.simple.databinding.BaseImageModel? {
-        return null
-    }
-
-    override fun getBaseImageModel2(): BaseImageModel? {
-        return null
-    }
 
     override fun getWorkInfoComponent(): WorkInfoComponent? {
         return null
+    }
+
+    override fun getBaseImageModel(): BaseImageModel? {
+       return  null
     }
 }
 

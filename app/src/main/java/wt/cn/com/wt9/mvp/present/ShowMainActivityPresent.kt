@@ -3,6 +3,7 @@ package wt.cn.com.wt9.mvp.present
 import android.support.v4.app.Fragment
 import android.support.v4.app.ListFragment
 import cn.com.base.mvp.BaseActivityPresent
+import cn.com.base.util.LogUtil
 import wt.cn.com.wt9.R
 import wt.cn.com.wt9.fragment.ShowFragment
 import wt.cn.com.wt9.mvp.contact.ShowMainContact
@@ -14,6 +15,9 @@ import wt.cn.com.wt9.mvp.contact.ShowMainContact
  */
 class ShowMainActivityPresent(var view: ShowMainContact.IShowMainMvpView) : BaseActivityPresent(view), ShowMainContact.IShowMainPresenter {
 
+    companion object {
+        val TAG="ShowMainActivityPresent"
+    }
     var fragments: MutableList<Fragment>? = mutableListOf()
 
     override fun initFragment() {
@@ -35,10 +39,12 @@ class ShowMainActivityPresent(var view: ShowMainContact.IShowMainMvpView) : Base
                 //显示fragment
                 if (fragment.isAdded) {
                     //如果这个fragment已经被事务添加,显示
+                    LogUtil.e(TAG," fragmentTransaction.show(fragment)--------"+fragment.javaClass.name)
                     fragmentTransaction.show(fragment)
                 } else {
                     //如果这个fragment没有被事务添加过,添加
-                    fragmentTransaction.add(R.id.container, fragment)
+                    LogUtil.e(TAG," fragmentTransaction.add(R.id.container--------"+fragment.javaClass.name)
+                    fragmentTransaction.add(R.id.show_container, fragment)
                 }
             } else {
                 //隐藏fragment

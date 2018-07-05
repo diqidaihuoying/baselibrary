@@ -5,9 +5,8 @@ package wt.cn.com.wt9.databinding
  * 描述: 图片加载基类
  * 作者:wantao
  */
- open class ImageComponent :BaseImageModel(),Component
-{
-    override fun getBaseImageModel2(): BaseImageModel? {
+open class ImageComponent : BaseImageModel(), Component {
+    override fun getBaseImageModel(): BaseImageModel {
         return this
     }
 }

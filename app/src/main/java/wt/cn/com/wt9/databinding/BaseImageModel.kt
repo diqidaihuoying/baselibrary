@@ -3,7 +3,7 @@ package wt.cn.com.wt9.databinding
 import android.databinding.BindingAdapter
 import android.widget.ImageView
 import cn.com.base.glide.GlideUtil
-import cn.com.base.simple.util.StrUtils
+import wt.cn.com.wt9.util.StrUtils
 
 /**
  * author      : wantao

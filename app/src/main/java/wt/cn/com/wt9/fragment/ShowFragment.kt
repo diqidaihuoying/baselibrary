@@ -4,8 +4,7 @@ package wt.cn.com.wt9.fragment
 import android.support.v4.app.Fragment
 import cn.com.base.base.BaseFragment
 import cn.com.base.base.TabAdapter
-import cn.com.base.simple.bean.Interest
-import cn.com.base.simple.fragment.TestFragment
+import wt.cn.com.wt9.bean.Interest
 import cn.com.base.util.LogUtil
 import wt.cn.com.wt9.R
 import wt.cn.com.wt9.databinding.FragmentShowBinding
@@ -30,7 +29,7 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowFragmentPresent>(),Sh
     protected var fragments: MutableList<Fragment>? = mutableListOf()
 
     override fun initView() {
-
+        tabAdapter=TabAdapter(childFragmentManager,fragments,titles)
     }
 
     override fun initData() {
@@ -43,7 +42,7 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowFragmentPresent>(),Sh
         result.forEach(
                 {
                     titles!!.add(it.name)
-                    fragments!!.add(TestFragment.newInstance(it.id))
+                    fragments!!.add(ShowChildFragment.newInstance(it.id))
                     LogUtil.e(TAG,it.name)
                 }
         )
