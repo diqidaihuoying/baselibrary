@@ -18,6 +18,6 @@ class ShowChildFragmentContact {
 
     interface ITestMvpView :MvpView
     {
-
+        fun adapterNotifyRang(startPosition:Int,count :Int)
     }
 }

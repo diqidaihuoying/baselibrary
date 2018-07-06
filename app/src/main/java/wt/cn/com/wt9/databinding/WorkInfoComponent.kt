@@ -38,6 +38,7 @@ class WorkInfoComponent : ImageComponent() {
         if (toInt < (DensityUtils.dip2px(150f)))
             toInt = DensityUtils.dip2px(150f)
         layoutParams.height = toInt
+        layoutParams.width=waterPullImageWidth
         view.layoutParams = layoutParams
     }
 

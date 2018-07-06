@@ -29,8 +29,7 @@ public class GlideUtil {
     public void loadCommonImg(Context context, String url, ImageView imageView) {
         RequestOptions colorOptions = new RequestOptions()
                 .placeholder(ColorUtils.getImageDrawable())
-                .error(ColorUtils.getImageDrawable())
-                .centerCrop();
+                .error(ColorUtils.getImageDrawable());
         Glide.with(context)
                 .load(url)
                 .apply(colorOptions)

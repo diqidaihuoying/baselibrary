@@ -12,7 +12,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         app:cardCornerRadius="3dp"
         app:cardElevation="0dp"
@@ -27,14 +27,14 @@
             <FrameLayout
                 android:id="@+id/layout_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/dp_200"
+                app:layout_height="@{work}">
 
                 <ImageView
                     android:id="@+id/iv_cover"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_200"
-                    app:imageUrl="@{work.cover}"
-                    app:layout_height="@{work}" />
+                    android:layout_height="match_parent"
+                    app:imageUrl="@{work.cover}" />
 
                 <ImageView
                     android:layout_width="@dimen/dp_50"
@@ -56,7 +56,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp_2"
                 android:layout_marginTop="@dimen/dp_2"
-                android:lines="1" />
+                android:lines="1"
+                app:summary="@{work.summary}" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,8 +73,7 @@
                     android:layout_weight="1"
                     android:drawableLeft="@mipmap/ic_eye"
                     android:drawablePadding="@dimen/dp_5"
-                    android:lines="1"
-                    android:text="@{String.valueOf(work.summary)}" />
+                    android:text="@{String.valueOf(work.pv)}" />
 
                 <TextView
                     android:id="@+id/tv_flower_num"

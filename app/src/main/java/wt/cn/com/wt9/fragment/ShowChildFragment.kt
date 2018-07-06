@@ -75,10 +75,8 @@ class ShowChildFragment : BaseFragment<FragmentShowChildBinding, ShowChildFragme
 
     }
 
-
-    override fun showContent() {
-        super.showContent()
-        adapter!!.notifyDataSetChanged()
+    override fun adapterNotifyRang(startPosition: Int, count: Int) {
+        adapter!!.notifyItemRangeChanged(startPosition,count)
     }
 
     /**

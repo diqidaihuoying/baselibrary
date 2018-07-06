@@ -21,7 +21,7 @@ class ShowChildFragmentPresenter(var view: ShowChildFragmentContact.ITestMvpView
     var pageSize: Int? = 10
 
     var currentPage: Int? = startPage
-
+    var minId:Int?=0
     var hid: Int? = 0
     var list: MutableList<Works>? = null
 
@@ -34,12 +34,14 @@ class ShowChildFragmentPresenter(var view: ShowChildFragmentContact.ITestMvpView
         var baseMap = RetrofitHelp.getBaseMap() as HashMap
         baseMap.put("pi", currentPage.toString())
         baseMap.put("ps", pageSize.toString())
+        baseMap.put("minId",minId.toString())
         baseMap.put("hid", hid.toString())
         applySchedulers(RetrofitHelp.apiService!!.getWorkList(baseMap as Map<String, Any>?)).subscribe(newObserver(object : ResponseCallback<List<Works>>() {
             override fun onNext(t: List<Works>) {
                 if (currentPage == startPage) {
                     list!!.clear()
                 }
+                var startPosition = list!!.size
                 if (t.isEmpty() && currentPage!! > startPage) {
                     currentPage = currentPage!! - 1
                 } else {
@@ -47,8 +49,14 @@ class ShowChildFragmentPresenter(var view: ShowChildFragmentContact.ITestMvpView
                 }
                 if (list!!.size != 0) {
                     view.showContent()
+                    var count = list!!.size - startPosition
+                    if (count > 0) {
+                        view.adapterNotifyRang(startPosition, count)
+                    }
+                    minId= list!![list!!.size-1].id
                 } else {
                     view.showEmpty()
+                    minId=0
                 }
             }
         }))
@@ -56,6 +64,7 @@ class ShowChildFragmentPresenter(var view: ShowChildFragmentContact.ITestMvpView
 
     override fun refresh() {
         currentPage = startPage
+        minId=0
         getData()
     }
 
