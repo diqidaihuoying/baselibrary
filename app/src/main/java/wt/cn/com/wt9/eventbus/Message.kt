@@ -1,4 +1,4 @@
-package cn.com.base.eventbus
+package wt.cn.com.wt9.eventbus
 
 /**
  * 创建日期：2018/6/21 on 17:04

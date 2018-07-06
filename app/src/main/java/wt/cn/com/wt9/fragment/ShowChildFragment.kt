@@ -10,7 +10,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.ViewGroup
 import cn.com.base.base.BaseFragment
 import cn.com.base.base.BaseRecyclerAdapter
-import cn.com.base.eventbus.Message
+import wt.cn.com.wt9.eventbus.Message
 import cn.com.base.eventbus.MessageEvent
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
@@ -19,7 +19,7 @@ import org.greenrobot.eventbus.EventBus
 
 import wt.cn.com.wt9.R
 import wt.cn.com.wt9.activity.WorkDetailsActivity
-import wt.cn.com.wt9.adapter.ShowChildRecAdapter
+import wt.cn.com.wt9.adapter.ShowChildAdapter
 import wt.cn.com.wt9.bean.Works
 import wt.cn.com.wt9.databinding.FragmentShowChildBinding
 import wt.cn.com.wt9.mvp.contact.ShowChildFragmentContact
@@ -39,7 +39,7 @@ class ShowChildFragment : BaseFragment<FragmentShowChildBinding, ShowChildFragme
         get() = R.layout.fragment_show_child
 
     var list: MutableList<Works> = mutableListOf()
-    var adapter: ShowChildRecAdapter? = null
+    var adapter: ShowChildAdapter? = null
 
     companion object {
         fun newInstance(id: Int): ShowChildFragment {
@@ -59,7 +59,7 @@ class ShowChildFragment : BaseFragment<FragmentShowChildBinding, ShowChildFragme
         mDataBinding!!.refreshLayout.setOnRefreshListener(this)
         mDataBinding!!.refreshLayout.setOnLoadMoreListener(this)
 
-        adapter = ShowChildRecAdapter(context, list)
+        adapter = ShowChildAdapter(context, list)
         adapter!!.setOnRcyClickListener(this)
         mDataBinding!!.recyclerView.layoutManager = LinearLayoutManager(context)
         mDataBinding!!.recyclerView.adapter = adapter
@@ -70,11 +70,14 @@ class ShowChildFragment : BaseFragment<FragmentShowChildBinding, ShowChildFragme
     }
 
     override fun initData() {
+        showLoadingView()
         basePresenter!!.getData()
 
     }
 
-    override fun showVp() {
+
+    override fun showContent() {
+        super.showContent()
         adapter!!.notifyDataSetChanged()
     }
 

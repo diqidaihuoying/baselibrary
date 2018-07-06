@@ -14,8 +14,13 @@ import java.util.*
  */
 class ShowChildFragmentPresenter(var view: ShowChildFragmentContact.ITestMvpView) : BaseFragmentPresent(view), ShowChildFragmentContact.ITestPresenter {
 
+    companion object {
+        var startPage = 1
+    }
+
     var pageSize: Int? = 10
-    var currentPage: Int? = 0
+
+    var currentPage: Int? = startPage
 
     var hid: Int? = 0
     var list: MutableList<Works>? = null
@@ -32,12 +37,16 @@ class ShowChildFragmentPresenter(var view: ShowChildFragmentContact.ITestMvpView
         baseMap.put("hid", hid.toString())
         applySchedulers(RetrofitHelp.apiService!!.getWorkList(baseMap as Map<String, Any>?)).subscribe(newObserver(object : ResponseCallback<List<Works>>() {
             override fun onNext(t: List<Works>) {
-                if (currentPage == 1) {
+                if (currentPage == startPage) {
                     list!!.clear()
                 }
-                list!!.addAll(t)
+                if (t.isEmpty() && currentPage!! > startPage) {
+                    currentPage = currentPage!! - 1
+                } else {
+                    list!!.addAll(t)
+                }
                 if (list!!.size != 0) {
-                    view.showVp()
+                    view.showContent()
                 } else {
                     view.showEmpty()
                 }
@@ -46,7 +55,7 @@ class ShowChildFragmentPresenter(var view: ShowChildFragmentContact.ITestMvpView
     }
 
     override fun refresh() {
-        currentPage = 1
+        currentPage = startPage
         getData()
     }
 

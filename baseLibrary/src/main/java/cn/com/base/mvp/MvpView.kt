@@ -15,5 +15,8 @@ interface MvpView
 
     /*显示空视图*/
     fun showEmpty()
+
+    /*显示空视图*/
+    fun showLoadingView()
 }
 

@@ -13,7 +13,7 @@ import wt.cn.com.wt9.bean.Works
  * 描述: 对workinfo做处理操作
  * 作者:wantao
  */
-class WorkInfoComponent : ImageComponent(){
+class WorkInfoComponent : ImageComponent() {
 
     override fun getWorkInfoComponent(): WorkInfoComponent? {
         return this
@@ -34,9 +34,9 @@ class WorkInfoComponent : ImageComponent(){
     @BindingAdapter("layout_height")
     fun setLayoutHeight(view: View, workInfo: Works) {
         val layoutParams = view.layoutParams
-        var toInt = (workInfo.height * waterPullImageWidth / workInfo.width).toInt()
-        if(toInt<(DensityUtils.dip2px(150f)))
-            toInt=DensityUtils.dip2px(150f)
+        var toInt = (workInfo.height * waterPullImageWidth / workInfo.width)
+        if (toInt < (DensityUtils.dip2px(150f)))
+            toInt = DensityUtils.dip2px(150f)
         layoutParams.height = toInt
         view.layoutParams = layoutParams
     }
@@ -56,7 +56,7 @@ class WorkInfoComponent : ImageComponent(){
             view.visibility = View.GONE
         } else {
             view.visibility = View.VISIBLE
-            (view as TextView ).text=string
+            (view as TextView).text = string
         }
     }
 }

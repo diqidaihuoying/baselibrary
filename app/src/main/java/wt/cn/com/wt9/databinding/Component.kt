@@ -18,5 +18,7 @@ interface Component:DataBindingComponent
     override fun getBaseImageModel(): BaseImageModel? {
        return  null
     }
+
+
 }
 

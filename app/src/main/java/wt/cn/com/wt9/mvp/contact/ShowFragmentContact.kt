@@ -17,6 +17,6 @@ class ShowFragmentContact {
 
     interface IShowFragmentMvpView:MvpView
     {
-        fun showVpData(result: List<Interest>)
+
     }
 }

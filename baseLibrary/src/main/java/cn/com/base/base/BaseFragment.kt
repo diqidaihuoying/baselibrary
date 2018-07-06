@@ -48,6 +48,10 @@ public abstract class BaseFragment<B : ViewDataBinding,P : BaseFragmentPresent> 
         mFragmentDataBinding!!.multiLayout.showEmpty()
     }
 
+    override fun showLoadingView() {
+        mFragmentDataBinding!!.multiLayout.showLoading()
+    }
+
     /**
      * 可重写
      */

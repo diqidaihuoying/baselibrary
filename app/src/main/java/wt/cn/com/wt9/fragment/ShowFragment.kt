@@ -36,22 +36,14 @@ class ShowFragment : BaseFragment<FragmentShowBinding, ShowFragmentPresent>(),Sh
         basePresenter!!.getVpData()
     }
 
-    override fun showVpData(result: List<Interest>) {
-        titles!!.clear()
-        fragments!!.clear()
-        result.forEach(
-                {
-                    titles!!.add(it.name)
-                    fragments!!.add(ShowChildFragment.newInstance(it.id))
-                    LogUtil.e(TAG,it.name)
-                }
-        )
+    override fun showContent() {
+        super.showContent()
         mDataBinding!!.viewPager.adapter = tabAdapter
         mDataBinding!!.tabLayout.setupWithViewPager(mDataBinding!!.viewPager);
     }
 
     override fun createPresenter(): ShowFragmentPresent? {
-        return ShowFragmentPresent(this)
+        return ShowFragmentPresent(this,titles,fragments)
     }
 
 
