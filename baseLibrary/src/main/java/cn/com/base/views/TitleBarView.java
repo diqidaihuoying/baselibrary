@@ -136,7 +136,7 @@ public class TitleBarView extends SkinCompatLinearLayout implements View.OnClick
         titlename = a.getString(R.styleable.TitleBarView_titlename);
         titlesize = (int) a.getDimension(R.styleable.TitleBarView_titlesize, titlesize);
         titlecolor = a.getColor(R.styleable.TitleBarView_titlecolor, ContextCompat.getColor(getContext(),R.color.cus_title_color));
-        //按钮显示的方式
+        //        //按钮显示的方式
         mDisplayLeft = a.getInt(R.styleable.TitleBarView_leftdisplay, DISPLAY_AIR);
         mDisplayRight = a.getInt(R.styleable.TitleBarView_rightdisplay, DISPLAY_AIR);
 
