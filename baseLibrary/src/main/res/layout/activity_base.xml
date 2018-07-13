@@ -13,7 +13,6 @@
             android:id="@+id/titlebar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_48"
-            app:titlecolor="@color/cus_title_color"
             android:background="@color/title_bar_background" />
 
         <cn.com.base.views.MultiLayout
