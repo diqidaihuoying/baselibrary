@@ -1,3 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--基础的文字颜色-->
+    <color name="text_color">#000000</color>
+    <!--titlebar背景色-->
+    <color name="title_bar_background">#FF4081</color>
+    <!--title颜色-->
+    <color name="cus_title_color">#ffffff</color>
+    <!--页面背景色-->
+    <color name="window_background">#ffffff</color>
+    <!--主页tablayout选中的颜色-->
+    <color name="tablayout_select_color">#FF4081</color>
+    <!--主页item选中的文字颜色-->
+    <color name="show_rec_item_text_color">#000000</color>
 </resources>

@@ -57,6 +57,7 @@
                 android:layout_marginBottom="@dimen/dp_2"
                 android:layout_marginTop="@dimen/dp_2"
                 android:lines="1"
+                android:textColor="@color/show_rec_item_text_color"
                 app:summary="@{work.summary}" />
 
             <LinearLayout
@@ -73,7 +74,8 @@
                     android:layout_weight="1"
                     android:drawableLeft="@mipmap/ic_eye"
                     android:drawablePadding="@dimen/dp_5"
-                    android:text="@{String.valueOf(work.pv)}" />
+                    android:text="@{String.valueOf(work.pv)}"
+                    android:textColor="@color/show_rec_item_text_color" />
 
                 <TextView
                     android:id="@+id/tv_flower_num"
@@ -82,7 +84,8 @@
                     android:layout_weight="1"
                     android:drawableLeft="@mipmap/ic_small_flower"
                     android:drawablePadding="@dimen/dp_5"
-                    android:text="@{String.valueOf(work.favors)}" />
+                    android:text="@{String.valueOf(work.favors)}"
+                    android:textColor="@color/show_rec_item_text_color" />
             </LinearLayout>
         </LinearLayout>
 

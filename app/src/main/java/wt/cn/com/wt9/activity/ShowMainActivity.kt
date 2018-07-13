@@ -4,6 +4,7 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import cn.com.base.base.BaseActivity
 import cn.com.base.views.TitleBarView
+import skin.support.annotation.Skinable
 import wt.cn.com.wt9.R
 import wt.cn.com.wt9.databinding.ActivityShowMainBinding
 import wt.cn.com.wt9.mvp.present.ShowMainActivityPresent

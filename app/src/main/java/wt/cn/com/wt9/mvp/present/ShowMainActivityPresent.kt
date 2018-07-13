@@ -5,6 +5,8 @@ import android.support.v4.app.ListFragment
 import cn.com.base.mvp.BaseActivityPresent
 import cn.com.base.util.LogUtil
 import wt.cn.com.wt9.R
+import wt.cn.com.wt9.fragment.MeFragment
+import wt.cn.com.wt9.fragment.MessageFragment
 import wt.cn.com.wt9.fragment.ShowFragment
 import wt.cn.com.wt9.mvp.contact.ShowMainContact
 
@@ -23,8 +25,8 @@ class ShowMainActivityPresent(var view: ShowMainContact.IShowMainMvpView) : Base
     override fun initFragment() {
         fragments!!.add(ShowFragment())
         fragments!!.add(ListFragment())
-        fragments!!.add(ListFragment())
-        fragments!!.add(ListFragment())
+        fragments!!.add(MessageFragment())
+        fragments!!.add(MeFragment())
 
         switchFragment(0)
     }

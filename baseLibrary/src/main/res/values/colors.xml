@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--状态栏颜色-->
-    <color name="colorPrimary">#FF4081</color>
-    <!--标题栏颜色-->
-    <color name="colorPrimaryDark">#FF4081</color>
-    <!--控件颜色-->
-    <color name="colorAccent">#FF4081</color>
-    
-    <color name="white">#FFFFFF</color>
 
+    <color name="white">#FFFFFF</color>
     <color name="ivory">#FFFFF0</color><!--象牙色 -->
     <color name="lightyellow">#FFFFE0</color><!--亮黄色 -->
     <color name="yellow">#FFFF00</color><!--黄色 -->
@@ -156,5 +149,13 @@
     <color name="black">#000000</color><!--黑色 -->
 
 
+    <!--title颜色-->
+    <color name="cus_title_color">#ffffff</color>
+    <!--titlebar背景色-->
+    <color name="title_bar_background">#ffffff</color>
+    <!--页面背景色-->
+    <color name="window_background">#ffffff</color>
     
+    <color name="colorPrimary_day">#FF4081</color>
+    <color name="colorPrimary_night">#808080</color>
 </resources>

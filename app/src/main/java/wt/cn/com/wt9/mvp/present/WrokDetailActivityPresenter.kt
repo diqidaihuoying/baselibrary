@@ -2,6 +2,7 @@ package wt.cn.com.wt9.mvp.present
 
 import cn.com.base.http.ResponseCallback
 import cn.com.base.mvp.BaseActivityPresent
+import skin.support.SkinCompatManager
 import wt.cn.com.wt9.bean.WorkDetails
 import wt.cn.com.wt9.http.RetrofitHelp
 import wt.cn.com.wt9.mvp.contact.WorkDetailActivityContact
@@ -25,6 +26,7 @@ class WrokDetailActivityPresenter(var  view: WorkDetailActivityContact.IWorkDeta
                 view.showWorkDetailView(mWorkDetail!!)
             }
         }))
+
     }
 
     override fun onFlower() {

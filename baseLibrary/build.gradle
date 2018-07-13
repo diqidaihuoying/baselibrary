@@ -26,6 +26,7 @@ android {
     dataBinding {
         enabled true
     }
+
 }
 
 kapt {
@@ -73,4 +74,12 @@ dependencies {
     /*design包*/
     api 'com.android.support:design:27.1.1'
 
+
+    api 'skin.support:skin-support:3.1.0-beta1'                   // skin-support 基础控件支持
+    api 'skin.support:skin-support-design:3.1.0-beta1'
+    // skin-support-design material design 控件支持[可选]
+    api 'skin.support:skin-support-cardview:3.1.0-beta1'
+    // skin-support-cardview CardView 控件支持[可选]
+    api 'skin.support:skin-support-constraint-layout:3.1.0-beta1'
+    // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
 }

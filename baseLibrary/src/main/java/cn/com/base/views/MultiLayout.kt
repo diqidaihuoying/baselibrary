@@ -7,6 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import cn.com.base.R
+import skin.support.widget.SkinCompatSupportable
+import skin.support.widget.SkinCompatBackgroundHelper
+import skin.support.widget.SkinCompatFrameLayout
+import skin.support.widget.SkinCompatTextHelper
+
+
 
 
 /**
@@ -14,7 +20,8 @@ import cn.com.base.R
  * 描述:
  * 作者:wantao
  */
-class MultiLayout(context: Context?, attrs: AttributeSet?) : FrameLayout(context, attrs) {
+class MultiLayout(context: Context?, attrs: AttributeSet?) : SkinCompatFrameLayout(context, attrs){
+
 
     var mInflater: LayoutInflater? = LayoutInflater.from(context)
     var mContentId = View.NO_ID

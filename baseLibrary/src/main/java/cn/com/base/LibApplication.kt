@@ -2,17 +2,18 @@ package cn.com.base
 
 import android.app.Application
 import android.content.Context
-import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AppCompatDelegate
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smartrefresh.layout.api.*
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
-import com.scwang.smartrefresh.layout.api.RefreshLayout
-import com.scwang.smartrefresh.layout.api.RefreshFooter
-import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
-import com.scwang.smartrefresh.layout.api.RefreshHeader
-import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
+import skin.support.SkinCompatManager
+import skin.support.app.SkinCardViewInflater
+import skin.support.constraint.app.SkinConstraintViewInflater
+import skin.support.design.app.SkinMaterialViewInflater
+import skin.support.utils.Slog
 
 
 /**
@@ -46,6 +47,17 @@ open class LibApplication : Application() {
                 return ClassicsFooter(context).setDrawableSize(20f)
             }
         })
+
+        //换肤
+        Slog.DEBUG = true
+        SkinCompatManager.withoutActivity(this)                         // 基础控件换肤初始化
+                .addInflater(SkinMaterialViewInflater())            // material design 控件换肤初始化[可选]
+                .addInflater(SkinConstraintViewInflater())          // ConstraintLayout 控件换肤初始化[可选]
+                .addInflater(SkinCardViewInflater())                // CardView v7 控件换肤初始化[可选]
+                .setSkinStatusBarColorEnable(false)                     // 关闭状态栏换肤，默认打开[可选]
+//                .setSkinWindowBackgroundEnable(true)                   // 关闭windowBackground换肤，默认打开[可选]
+                .loadSkin()
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     }
 
     /**

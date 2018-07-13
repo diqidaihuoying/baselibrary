@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="text_color_night">#ffffff</color>
+    <!--主页tablayout选中的颜色-->
+    <color name="tablayout_select_color_night">#A52A2A</color>
+
+    <!--title颜色-->
+    <color name="cus_title_color_night">#4B0082</color>
+
+    <!--title背景色-->
+    <color name="title_bar_background_night">#808080</color>
+    <!--页面背景色-->
+    <color name="window_background_night">#000000</color>
+</resources>

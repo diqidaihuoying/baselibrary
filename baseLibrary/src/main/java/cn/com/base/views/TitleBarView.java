@@ -6,10 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import cn.com.base.R;
+import skin.support.widget.SkinCompatLinearLayout;
 
 
 /**
@@ -17,7 +17,7 @@ import cn.com.base.R;
  * @时间: 2018/6/22 13:20
  * @描述:
  */
-public class TitleBarView extends LinearLayout implements View.OnClickListener {
+public class TitleBarView extends SkinCompatLinearLayout implements View.OnClickListener{
     /**
      * 参数属性
      * titlename：标题的名称
@@ -55,7 +55,7 @@ public class TitleBarView extends LinearLayout implements View.OnClickListener {
     //标题的名称
     private String titlename;
     //标题的颜色
-    private int    titlecolor;
+    private int    titlecolor=0;
     //左边按钮的显示状态
     private int    mDisplayLeft;
     //右边按钮的显示状态
@@ -67,9 +67,9 @@ public class TitleBarView extends LinearLayout implements View.OnClickListener {
     //右边TextView的名称
     private String rightbtnName;
     //左边TextView的颜色
-    private int leftbtnColor  = 0xFF666666;
+    private int leftbtnColor  = 0;
     //右边TextView的颜色
-    private int rightbtnColor = 0xFF666666;
+    private int rightbtnColor = 0;
     //左边TextView 按钮的大小
     private int leftbtnSize   = 16;
     //右边TextView 按钮的大小
@@ -115,7 +115,6 @@ public class TitleBarView extends LinearLayout implements View.OnClickListener {
 
     public TitleBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        titlecolor = ContextCompat.getColor(getContext(), R.color.white);
         initview(attrs);
     }
 
@@ -136,7 +135,7 @@ public class TitleBarView extends LinearLayout implements View.OnClickListener {
         //标题的参数
         titlename = a.getString(R.styleable.TitleBarView_titlename);
         titlesize = (int) a.getDimension(R.styleable.TitleBarView_titlesize, titlesize);
-        titlecolor = a.getColor(R.styleable.TitleBarView_titlecolor, titlecolor);
+        titlecolor = a.getColor(R.styleable.TitleBarView_titlecolor, ContextCompat.getColor(getContext(),R.color.cus_title_color));
         //按钮显示的方式
         mDisplayLeft = a.getInt(R.styleable.TitleBarView_leftdisplay, DISPLAY_AIR);
         mDisplayRight = a.getInt(R.styleable.TitleBarView_rightdisplay, DISPLAY_AIR);
@@ -144,8 +143,8 @@ public class TitleBarView extends LinearLayout implements View.OnClickListener {
         //TextView按钮的参数
         leftbtnName = a.getString(R.styleable.TitleBarView_leftbtnName);
         rightbtnName = a.getString(R.styleable.TitleBarView_rightbtnName);
-        leftbtnColor = a.getColor(R.styleable.TitleBarView_leftbtnColor, leftbtnColor);
-        rightbtnColor = a.getColor(R.styleable.TitleBarView_rightbtnColor, rightbtnColor);
+        leftbtnColor = a.getColor(R.styleable.TitleBarView_leftbtnColor, ContextCompat.getColor(getContext(),R.color.cus_title_color));
+        rightbtnColor = a.getColor(R.styleable.TitleBarView_rightbtnColor, ContextCompat.getColor(getContext(),R.color.cus_title_color));
         leftbtnSize = (int) a.getDimension(R.styleable.TitleBarView_titlesize, leftbtnSize);
         rightbtnSize = (int) a.getDimension(R.styleable.TitleBarView_titlesize, rightbtnSize);
 

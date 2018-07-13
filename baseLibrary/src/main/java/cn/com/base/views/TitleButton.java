@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import cn.com.base.R;
+import skin.support.widget.SkinCompatRelativeLayout;
 
 
 /**
@@ -17,7 +18,7 @@ import cn.com.base.R;
  * @时间: 2018/6/23 10:22
  * @描述:
  */
-public class TitleButton extends RelativeLayout {
+public class TitleButton extends SkinCompatRelativeLayout {
     /**
      * 参数属性
      * tvname：当显示文字时显示的内容

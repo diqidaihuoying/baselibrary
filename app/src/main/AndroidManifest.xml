@@ -17,8 +17,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.WorkDetailsActivity" />
-        <activity android:name=".activity.EmptyActivity"></activity>
+        <activity android:name=".activity.WorkDetailsActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="my.com"
+                    android:scheme="m" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.WebActivity"></activity>
     </application>
 
 </manifest>
