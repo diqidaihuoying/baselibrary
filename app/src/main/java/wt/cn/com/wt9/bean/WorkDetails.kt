@@ -1,12 +1,9 @@
 package wt.cn.com.wt9.bean
 
 import android.databinding.BaseObservable
-import android.databinding.Bindable
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
-import cn.com.base.BR
 import cn.com.base.LibApplication
-import cn.com.base.R
 import cn.com.base.util.DateUtil
 
 /**

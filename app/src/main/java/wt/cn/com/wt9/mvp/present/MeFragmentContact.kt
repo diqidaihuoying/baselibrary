@@ -5,11 +5,10 @@ import cn.com.base.mvp.BaseFragmentPresent
 import cn.com.base.mvp.MvpView
 import cn.com.base.util.LogUtil
 import cn.com.base.util.StatusColorUtil
+import cn.com.base.util.ThemeUtil
 import skin.support.SkinCompatManager
 import wt.cn.com.wt9.R
 import wt.cn.com.wt9.mvp.contact.MeFragmentContact
-import cn.com.base.util.ThemeUtil
-import skin.support.content.res.SkinCompatUserThemeManager
 
 /**
  * 创建日期：2018/7/12 on 15:08

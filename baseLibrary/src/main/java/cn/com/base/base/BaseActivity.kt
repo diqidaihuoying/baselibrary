@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import cn.com.base.R
 import cn.com.base.databinding.ActivityBaseBinding
+import cn.com.base.http.HttpResult
 import cn.com.base.mvp.BaseActivityPresent
 import cn.com.base.mvp.MvpView
 import cn.com.base.views.TitleBarView

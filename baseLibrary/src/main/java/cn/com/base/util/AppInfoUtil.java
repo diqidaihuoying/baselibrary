@@ -140,4 +140,24 @@ public class AppInfoUtil {
         String runningActivity=activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
         return runningActivity;
     }
+
+    /**
+     * 给定包名
+     * 判断手机中是否安装了某个应用
+     */
+    public static boolean checkApkInstall(Context context, String packageName) {
+        if (context != null) {
+            List<PackageInfo> packages = context.getPackageManager().getInstalledPackages(0);
+            for (int i = 0; i < packages.size(); i++) {
+                PackageInfo packageInfo = packages.get(i);
+                //Log.i("HHJ", "PackageInfo  "+packageInfo.packageName+"   "+packageInfo.applicationInfo.className);
+                if (packageInfo.packageName.equals(packageName)) {
+                    return true;
+                } else {
+                    continue;
+                }
+            }
+        }
+        return false;
+    }
 }

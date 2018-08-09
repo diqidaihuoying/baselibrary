@@ -24,6 +24,8 @@ android {
     dataBinding {
         enabled true
     }
+
+
     lintOptions {
         abortOnError false
     }
@@ -55,5 +57,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':baselibrary')
-
+    implementation files('libs/SpeechServiceLibUtil.jar')
 }

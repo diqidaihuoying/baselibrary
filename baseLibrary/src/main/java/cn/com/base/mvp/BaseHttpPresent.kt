@@ -35,6 +35,7 @@ open class BaseHttpPresent(view: MvpView)  {
                 .map { tHttpResult -> tHttpResult.data }
     }
 
+
     protected fun <T> newObserver(callback: ResponseCallback<T>): Observer<T> {
         return object : Observer<T> {
             override fun onError(e: Throwable) {
